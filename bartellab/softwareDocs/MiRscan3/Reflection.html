@@ -1,0 +1,32 @@
+<html>
+
+<body>
+
+
+<b><u><a id="Reflection">Reflection</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+
+<br>
+
+<p>The strength of the mirscan system is its flexibility and ease of modification.  The ability to
+fluidly modify the features of miRNA hairpins that are examined and the way that they are examined
+is crucial as our knowledge of miRNA structure and function continues to evolve.  The efficiency with
+which training and evaluation can be performed is also important as miRNAs are examined across the
+major clades.  Scoring matrices developed in one model system may not accurately reflect the 
+properties of miRNAs in another set of species, so the ability to efficiently generate custom
+scoring systems even when the features being examined remain constant increases this tool's utility.
+The ability to refine scoring matrices as poor candidates are eliminated also maximizes the power of
+log-odds scoring in predicting miRNA genes.</p>
+
+<p>The primary shortcoming of the system's current implementation is the inflexibility of the current
+<i>criteria/feature</i> objects.  For instance, the development of independent criteria for examining single-species
+versus two-species candidate sets allowed me to avoid having to develop truly flexible N-species 
+criteria.  Fortunately, the system's flexibility confines the solution for this shortcoming to
+the development of flexible criteria objects, and makes such solutions more accessible to the
+comunity by removing the need for re-development of a miRNA-prediction infrastructure to host
+such improvements.</p>
+
+- J. Graham Ruby
+
+
+</body>
+</html>

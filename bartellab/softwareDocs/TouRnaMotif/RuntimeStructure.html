@@ -1,0 +1,247 @@
+<html>
+
+<body>
+
+
+<b><u><a id="RuntimeStructure">Runtime Structure/User Manual</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+<ul>
+  <li><a href="#motifInterface">Motif interface</a></li>
+  <ul>
+    <li><a href="#sequence">SEQUENCE</a></li>
+    <li><a href="#seq_list">SEQ_LIST</a></li>
+    <li><a href="#pssm">PSSM</a></li>
+    <li><a href="#two_pssm">TWO_PSSM</a></li>
+    <li><a href="#distance_pssm">DISTANCE_PSSM</a></li>
+  </ul>
+  <li><a href="#attributes">touScoreModule attributes</a></li>
+</ul>
+
+
+<br><br><br>
+
+<a id="motifInterface"><u>Motif interface</u></a>
+
+<p>This interface was designed so that diverse sequence motif scoring systems could be
+applied to real sequences in a similar manner, and so that scoring systems with essentially
+different methods of evaluation could easily be substituted for one another without changing
+the user code.  The interface is a dictionary that must contain the following (string) keys:
+</p>
+
+<ul>
+  <li><i>"name"</i>: a string with the motif's name (for example, "Large motif").</li>
+  <li><i>"string"</i>: a string that describes the motif.</li>
+  <li><i>"len"</i>: the integer length of the motif, i.e. the number of positions
+       between and including the first position of the motif and the last
+       position of the motif.</li>
+  <li><i>"apply"</i>: a function that takes one argument (a string) and returns
+       a number (i.e. a score) indicating how well the input sequence matches
+       the motif.</li>
+</ul>
+
+
+<p>The "name" and "string" keys access motif documentation.  The "name" key is intended as a simple
+label, and the "string" key is intended to point to some printable description of the motif (for
+instance, a Position-Specific Scoring Matrix might output a tab-delimited table of the scores
+assigned to each nucleotide identity at each position).  The "len" key points to the length of sequence
+that can be evaluated by the motif scoring system.  It specifies the required length of the input string
+taken by the function to which "apply" points.  This function takes a string of the specified length as
+its only argument and returns a number.  That number is the score for the motif's match to the provided
+sequence.</p>
+
+
+<br><br><br>
+
+<a id="sequence"><u>SEQUENCE</u></a>
+
+<p>SEQUENCE is the most basic definition of a sequence motif.  It defines a
+motif as a string of characters.  Matches to the motif are matches to that
+string.</p>
+
+<p>The SEQUENCE constructor takes a string as its argument and returns a motif
+interface which considers the motif to be a perfect match to that sequence.</p>
+
+<br><br><br>
+
+<a id="seq_list"><u>SEQ_LIST</u></a>
+
+<p>SEQ_LIST is a definition of a motif where each position of the motif can
+have one in a set of identities.</p>
+
+<p>The SEQ_LIST constructor takes a list of strings as its argument.  Each string
+in the list represents a position in the motif, and each character in the string
+represents an acceptable match for a character in that position.  The special
+character '*' anywhere in the position's string represents that ANY character is
+acceptable in that position.  The constructor returns a motif interface reflecting
+these properties.  An example:<br>
+<pre>['C','T','G','T','T','T','C','A','*','*','*','*','GA']</pre></p>
+
+
+<br><br><br>
+
+<a id="pssm"><u>PSSM</u></a>
+
+<p>The PSSM constructor will take in a text string which is a table of space- or tab-separated
+columns depicting nucleotide frequencies and construct a PSSM from it.  The format for the
+text string will be like the following example:</p>
+
+<pre>
+background   .25  .25 .25 .25
+table-name    A   T   G   C
+0             50 97   200 31
+5             12  4   350 7
+</pre>
+
+<p>Requirements of the input string:</p>
+<ul>
+  <li>Lines must be separated by "\n".</li>
+  <li>The first line with text must be background frequencies in float notation.</li>
+  <li>The second line with text must have letter keys.</li>
+  <li>Lines without text must have no other characters.</li>
+  <li>Lines with text must have the same number of entries.</li>
+</ul>
+
+
+
+<br><br><br>
+
+<a id="two_pssm"><u>TWO_PSSM</u></a>
+
+<p>TWO_PSSM integrates two PSSMs together, and combines their values with a third
+value, also derived from a log-odds score; that is the distance between the
+two PSSMS.  The starting position of the sequence read is defined by the user
+input.  The shorter of the two PSSMs is slid through the permissible range of
+positions of the input sequence; at each position, its distance score and motif
+score are summed, and the maximum across the set of permitted input values is
+returned as a sum with the score from the other, static PSSM.</p>
+
+<p>The constructor takes in two PSSMs.  These can be generated using the PSSM
+constructor.  They are given in the order in which they are expected to appear
+(5p first). The remaining input is a string reflecting the length distribution.
+Its format is similar to that of the PSSM input string, but with integers representing
+distances between the two PSSMs as opposed to letters.  The name in that string
+will be the name given to the motif.  An example is shown below:</p>
+
+
+<pre>
+name   3   4    5   6     7   8    10  11
+blah  47  289 5935 4443 2323 1119 334  23
+</pre>
+
+
+<p>There is no background line at the top because the background assumption is an even
+distribution over all available permissable positions.  The string 'blah' can be
+anything but whitespace; it is just a placeholder.</p>
+
+<p>TWO_PSSMs have an additional attribute: two_pssm['positions'](seq) will return
+the starting positions for pssmA and pssmB as a two-item list of integers.  The
+integers will be the indexes of the starting positions for the two pssms in the
+input seq, which is a string.</p>
+
+
+
+<br><br><br>
+
+<a id="distance_pssm"><u>DISTANCE_PSSM</u></a>
+
+<p>This is like the distance portion of TWO_PSSM, but alone.
+The constructor takes in a string reflecting the length distribution.
+Its format is similar to that of the PSSM input string, but with integers representing
+distances between the two PSSMs as opposed to letters.  The name in that string
+will be the name given to the motif.  An example is shown below:</p>
+
+
+<pre>
+# name   3   4    5   6     7   8    10  11
+# blah  47  289 5935 4443 2323 1119 334  23
+</pre>
+
+
+<p>There is no background line at the top because the background assumption is an even
+distribution over all available permissable positions.  The string 'blah' can be
+anything but whitespace; it is just a placeholder.</p>
+
+<p>The distance pssm does not fully implement the PSSM interface because the length value
+is meaningless here.  Instead, there are two keys: 'min len' and 'max len',
+corresponding to the minimum and maximum key values.</p>
+
+
+
+<br><br><br>
+
+<a id="attributes"><u>touScoreModule Attributes</u></a>
+
+<p>The touScoreModule provides an implementation of the 21U-RNA-associated upstream motif.
+The motif is implemented as two PSSMs and a DISTANCE PSSM, bound by the variable names 
+<i>largeMotif</i>, <i>distance</i>, and <i>smallMotif</i>.  Several functions are also
+provided for applying the 21U-RNA motif to real sequences:</p>
+
+<ul>
+  <li>applyScore</li>
+  <ul>
+    <li><i>Description</i></li>
+    <ul><li>Reports the 21U-RNA upstream motif score given the 5p end of the RNA species.  The small
+            motif is fixed and applied around the 21U-RNA 5p end.  The large motif is applied at each upstream
+            position permitted by the distance matrix.  The returned score is the small motif score
+            added to the highest sum of a distance score with its corresponding large motif score.</li></ul>
+    <li><i>Arguments</i></li>
+    <ul>
+      <li><i>seq</i>: the sequence to be scored.  It includes the length of the large motif,
+          the maximum possible distance between the two motifs, and the length of the small motif.
+          The 5p end of the candidate 21U-RNA is considered given as one nucleotide upstream from
+          the end of the sequence.  Two global variables are provided by touScoreModule to aid in
+          assembling a sequence across the appropriate span of nucleotides. <i>upLen</i> indicates
+          the number of nucleotides to include upstream of the candidate 21U-RNA 5p nucleotide.  <i>downLen</i>
+          indicates the number of nucleotides to include downstream of the candidate 21U-RNA 5p nucleotide.
+          Neither of these counts includes the 5p nucleotide itself.</li>
+    </ul>
+    <li><i>Returns</i></li>
+    <ul><li>A float with the 21U-RNA motif score for the given sequence.  In the current study, RNAs with scores
+            greater than or equal to 7 were classified as 21U-RNAs.</li></ul>
+  </ul>
+  <li>predictTou</li>
+  <ul>
+    <li><i>Description</i></li>
+    <ul><li>Similar to <i>applyScore</i>, but keeps the large motif fixed and allows the small
+            motif to slide across the distances allowed by the distance matrix.  Determines the
+            maximum score for the motif by adding the large motif score to the highest sum of a 
+            distance score with its corresponding large motif score.</li></ul>
+    <li><i>Arguments</i></li>
+    <ul>
+      <li><i>seq</i>: the sequence to be scored.  Length requirements are the same as for <i>applyScore</i>,
+          but without special relationship to the 5p end position for the hypothetical 21U-RNA.</li>
+    </ul>
+    <li><i>Returns</i></li>
+    <ul>
+      <li><i>maxScore</i>: the maximum score that the input sequence can give for a 21U-RNA motif match.</li>
+      <li><i>maxPosition</i>: the position in the input sequence, indexed from zero, that gives the highest
+          21U-RNA motif score when it corresponds to the 5p nucleotide of the hypothetical 21U-RNA.</li>
+    </ul>
+  </ul>
+  <li>findTous</li>
+  <ul>
+    <li><i>Description</i></li>
+    <ul><li>Predicts 21U-RNAs from within the provided sequence based on motif match scores.</li></ul>
+    <li><i>Arguments</i></li>
+    <ul>
+      <li><i>seq</i>: the nucleic acid sequence within which 21U-RNAs will be predicted.  Predictions
+          will be made on the sense strand only.</li>
+      <li><i>minScore</i>: the minimum upstream motif score that will be annotated as a 21U-RNA.</li>
+    </ul>
+    <li><i>Returns</i></li>
+    <ul><li>A list of integers with the 5p nucleotide positions for 21U-RNAs predicted in the sequence
+            to have upstream motif scores greater than or equal to the specified threshold.  Sequence
+            positions are indexed from 0.</li></ul>
+  </ul>
+  <li>downLen</li>
+    <ul><li>This is an integer constant; it is the number of nucleotides downstream of the 21U-RNA 
+            5p nucleotide that are needed to execute <i>applyScore</i>.</li></ul>
+  <li>upLen</li>
+    <ul><li>This is an integer constant; it is the number of nucleotides upstream of the 21U-RNA 
+            5p nucleotide that are needed to execute <i>applyScore</i>.</li></ul>
+</ul>
+<br><br>
+
+
+
+</body>
+</html>

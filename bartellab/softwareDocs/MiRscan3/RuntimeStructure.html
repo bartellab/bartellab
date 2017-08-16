@@ -1,0 +1,104 @@
+<html>
+
+<body>
+
+
+<b><u><a id="RuntimeStructure">Runtime Structure</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+<ul>
+  <li><a href="#feature">Criteria/Features</li>
+  <li><a href="#train">Training</a></li>
+  <li><a href="#scoring">Scoring</a></li>
+</ul>
+
+
+<br><br><br>
+
+<a id="feature"><u>Criteria/Features</u></a>
+
+<p>Criteria/features are aspects of a hairpin that can be examined in order to gain insight as to
+whether or not it is a miRNA precursor, such as "number of unpaired nucleotides" or "miRNA 5p nucleotide
+identity".  These are represented following evaluation of a <a href="FileFormats.html#criteria"><i>criteria</i></a>
+file as entries in a dictionary, <i>fdict</i>, in the global environment.  Each feature has a unique name (keys
+in the dictionary) and is represented as an instance of either <i>string_feature</i> or <i>number_feature</i>, two
+classes that are implemented in the <i>mirscanModule.py</i>.</p>
+
+
+
+<p>Each instance of either feature class requires that the user add two attributes:
+
+<ul>
+  <li><i>Feature.fx</i>: a function for evaluating the feature in question; must take <i>self</i> and <i>args</i> 
+    dictionary as only arguments and return a string.</li>
+  <li><i>Feature.kl</i>: a list of all possible return values from <i>Feature.fx</i> that are accepted for that feature</li>
+</ul>
+
+There are also four class-defined attributes that satisfy the requirements of a <i>feature</i> interface.  They are:
+
+<ul>
+  <li><i>Feature.type</i>: a string labelling the instance as a 'string'-type or 'number'-type feature</li>
+  <li><i>Feature.kv</i>: a function for binning string returned by fx.  for strings, the arg value x is returned;
+    for numbers, the input value is put into the appropriate bin out of those defined by <i>Feature.kl</i>,
+    and that bin's key is returned.</li>
+  <li><i>Feature.ex</i>: a function for taking in the appropriate set of arguments for evaluating a hairpin 
+    candidate and returning the appropriate key</li>
+  <li><i>Feature.pseudo</i>: a function for adding pseudocounts; the argument is a dictionary whose keys are those 
+    of <i>Feature.kl</i> and whose values are numbers corresponding to the counts of hairpins whose <i>Feature.ex</i> 
+    result is the given key.</li>
+</ul>
+
+The user may give a <i>Feature</i> instance additional attributes to attach any other values that are necessary
+for the feature's evaluation.</p>
+
+
+<p>The global environment created by a <a href="FileFormats.html#criteria"><i>criteria</i></a> file also contains
+the variable <i>mirscan</i> which is bound to a function for the evaluation of miRNA hairpin candidates in terms
+of the features implemented in <i>fdict</i>.  If the user wants any pre-processed information about the hairpin
+candidate to be passed to the <i>feature.fx</i> functions, such as a secondary structure or an alignment, then
+the user must include those data as values in the dictionary <i>args</i> that will be passed to all of the 
+<i>feature.fx</i> functions in lieu of specialized sets of arguments.</p>
+
+
+
+
+<br><br><br>
+
+
+<a id="train"><u>Training</u></a>
+
+<p>Abstractly, training comprises an evaluation of a series of foreground and a series of background
+miRNA hairpins.  To this end, <i>mirscanTrainer.py</i> creates three data structures: 1) a set of features to be evaluated,
+2) a set of foreground hairpins (the training set; samples of <i>real</i> miRNA hairpins), and 3) a set of background 
+candidate hairpins.  Background hairpins will be scored later, and this set is represented as a list of instances of the
+<i>Candidate</i> class that is implemented in <i>mirscanModule.py</i>.  The arguments taken by the constructor are:
+
+<ul>
+  <li><i>name</i>: a non-empty string that is the name for the candidate; should not contain any whitespace.</li>
+  <li><i>orgToSeq</i>: a dictionary whose keys are organism/genome names (see the specifications for 
+    <a href="FileFormats.html#fax"><i>.fax</i></a> or <a href="FileFormats.html#train"><i>.train</i></a> files) and
+    whose values are hairpin sequences (all-uppercase strings of the characters 'A', 'T', 'C', 'G', and 'N').</li>
+</ul>
+
+The foreground miRNA hairpins also have the start positions of the miRNAs defined in a parallel list.  Each item
+in this list is a dictionary whose keys are the same as <i>orgToSeq</i> and whose values are integers corresponding
+to the miRNA 5p nucleotide positions in the corresponding hairpin (indexed from 0).  The index of each Candidate in 
+the candidates list equals the index of the corresponding start position dictionary in the starts list.</p>
+
+<p>The number of candidates for which each possible value for each feature is returned is kept track of for
+each dataset (the foreground dataset and the background dataset) in a two-tiered dictionary structure whose first
+(outer) keys are the names of features, whose second (inner) keys are the items of that feature's <i>Feature.kl</i> 
+list, and whose values are the corresponding hairpin counts.</p>
+
+
+<br><br><br>
+
+<a id="scoring"><u>Scoring</u></a>
+
+<p>The runtime structure during scoring is very similar to that of training.  The <i>mirscan</i> function
+that is implemented in the <a href="#feature">criteria</a> file scores a set of candidate miRNA hairpins
+using a scoring matrix that is represented as a two-tiered dictionary structure whose first
+(outer) keys are the names of features, whose second (inner) keys are the items of that feature's <i>Feature.kl</i> 
+list, and whose values are the floating-point scores that will be added for that value being returned by the function.</p>
+
+
+</body>
+</html>

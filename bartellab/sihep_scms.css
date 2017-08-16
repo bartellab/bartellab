@@ -1,0 +1,96 @@
+div#container div#headerlinks         {
+	left: 484px; 
+	width:275px;
+	font-size: 11px;
+	font-size: 10px;
+}
+div#container div#headerlinks a       { position: relative; top: 10px; left: 20px; background-color: inherit; color: #682069; font-weight: bold; text-decoration: none; padding: 0px 5px 0px 7px; }
+div#container div#headerlinks a:hover { text-decoration: none; }
+div#container div#headerlinks input   { margin-left: 9px; width: 90px; padding-left: 2px; border: 1px solid black; background-color: inherit; color: #A479A5; font-size: 9px; }
+div#container div#headerlinks input[type=text]:focus { color: #000;}
+
+
+div#content img { float: right; margin: 0px 4px 4px 4px; }
+
+div#center_title { height: 30px; position; relative; left: 177px; top: 40px; z-index: 2; width: 234px; background-image: url(http://web.wi.mit.edu/bartel/pub/img/members.jpg); background-repeat: no-repeat; }
+div#center_title h2 { display: none; }
+div#center_title a { display: none; width: 234px; height: 54px; padding: 0px; position: absolute; top: 0px; display: block; left: 0px; }
+div#center_title_home { height: 106px; widht: 451px; position: absolute ; left: 177px; top: 204px; z-index: 2; background-image: url(http://web.wi.mit.edu/bartel/pub/img/members.jpg); backgroudn-repeat: no-repeat; }
+div#center_title_home h2 { display: none; }
+div#center_title_home a { display: none;  }
+
+/** Page Title */
+div#page_title { display: none}
+div#page_title { margin-left: 170px; margin-top: 82px; margin-bottom: 8px; font-family: Gotham-Book, Arial, Helvetica, Sans-Serif; }
+div#page_title { width: 768px; font-size: 28px; color: #485D00; text-align: left; vertical-align: bottom; padding-bottom: 10px}
+
+div#page_title h2 { font-size: 28px; width: 768px; color: #485D00; }
+div#page_title h2 { position: relative; top: 10px; left: 10px; margin: 0px 10px 0px 10px; padding: 0px 0px 0px 10px; }
+
+
+div.sihepTitle { margin: 0px 0px 0px 0px; padding: 0px; height: 10px;}
+
+
+/** Department Navigation */
+div#main_navigation { }
+
+#listMenuRoot {
+	float: left;
+	position: absolute;
+	left: -28px;
+	top: 120px;
+	width: 103px;
+	background-color: #fff; 
+	padding: 7px 0px 0px 7px;
+}
+
+div#main_navigation ul#listMenuRoot {list-style-type:none; margin-left:45px; padding-left: 0px; margin-top:0px; }
+
+ul#listMenuRoot li { display:block; height:42px;}
+ul#listMenuRoot li a { display:block; height:42px;}
+
+ul#listMenuRoot #nav_home_current, ul#listMenuRoot li:hover #nav_home, ul#listMenuRoot li a#nav_home:hover,
+ul#listMenuRoot li.CSStoHighlight #nav_home      { background: url(http://web.wi.mit.edu/bartel/pub/img/side_home2.jpg) no-repeat left top; } 
+ul#listMenuRoot #nav_home                        { background: url(http://web.wi.mit.edu/bartel/pub/img/side_home1.jpg) no-repeat left top; }
+
+ul#listMenuRoot #nav_about_current, ul#listMenuRoot li:hover #nav_about, ul#listMenuRoot li a#nav_about:hover,
+ul#listMenuRoot li.CSStoHighlight #nav_about      { background: url(http://web.wi.mit.edu/bartel/pub/img/side_research2.jpg) no-repeat left top; } 
+ul#listMenuRoot #nav_about                        { background: url(http://web.wi.mit.edu/bartel/pub/img/side_research1.jpg) no-repeat left top; }
+
+ul#listMenuRoot #nav_events_current, ul#listMenuRoot li:hover #nav_events, ul#listMenuRoot li a#nav_events:hover,
+ul#listMenuRoot li.CSStoHighlight #nav_events        { background: url(http://web.wi.mit.edu/bartel/pub/img/side_member2.jpg) no-repeat left top; }
+ul#listMenuRoot #nav_events                          { background: url(http://web.wi.mit.edu/bartel/pub/img/side_member1.jpg) no-repeat left top;  }
+
+ul#listMenuRoot #nav_projects2_current, ul#listMenuRoot li:hover #nav_projects2, ul#listMenuRoot li a#nav_projects2:hover,
+ul#listMenuRoot li.CSStoHighlight #nav_projects2        { background: url(http://web.wi.mit.edu/bartel/pub/img/side_alumni2.jpg) no-repeat left top;  }
+ul#listMenuRoot #nav_projects2                          { background: url(http://web.wi.mit.edu/bartel/pub/img/side_alumni1.jpg) no-repeat left top; }
+
+ul#listMenuRoot #nav_projects_current, ul#listMenuRoot li:hover #nav_projects, ul#listMenuRoot li a#nav_projects:hover,
+ul#listMenuRoot li.CSStoHighlight #nav_projects        { background: url(http://web.wi.mit.edu/bartel/pub/img/side_publication2.jpg) no-repeat left top;  }
+ul#listMenuRoot #nav_projects                          { background: url(http://web.wi.mit.edu/bartel/pub/img/side_publication1.jpg) no-repeat left top; }
+
+ul#listMenuRoot #nav_news_current, ul#listMenuRoot li:hover #nav_news, ul#listMenuRoot li a#nav_news:hover,
+ul#listMenuRoot li.CSStoHighlight #nav_news          { background: url(http://web.wi.mit.edu/bartel/pub/img/side_protocol2.jpg) no-repeat left top; }
+ul#listMenuRoot #nav_news                            { background: url(http://web.wi.mit.edu/bartel/pub/img/side_protocol1.jpg) no-repeat left top;  }
+
+ul#listMenuRoot #nav_people_current, ul#listMenuRoot li:hover #nav_people, ul#listMenuRoot li a#nav_people:hover,
+ul#listMenuRoot li.CSStoHighlight #nav_people       { background: url(http://web.wi.mit.edu/bartel/pub/img/side_software2.jpg) no-repeat left top; }
+ul#listMenuRoot #nav_people                         { background: url(http://web.wi.mit.edu/bartel/pub/img/side_software1.jpg) no-repeat left top;  }
+
+ul#listMenuRoot #nav_contact_current, ul#listMenuRoot li:hover #nav_contact, ul#listMenuRoot li a#nav_contact:hover,
+ul#listMenuRoot li.CSStoHighlight #nav_contact           { background: url(http://web.wi.mit.edu/bartel/pub/img/side_targetscan2.jpg) no-repeat left top;  }
+ul#listMenuRoot #nav_contact                             { background: url(http://web.wi.mit.edu/bartel/pub/img/side_targetscan1.jpg) no-repeat left top; }
+
+/* replace navigation text with background images */
+
+ul#listMenuRoot #nav_home_current span.text,  ul#listMenuRoot #nav_home span.text,
+ul#listMenuRoot #nav_about_current span.text,  ul#listMenuRoot #nav_about span.text,
+ul#listMenuRoot #nav_events_current span.text,    ul#listMenuRoot #nav_events span.text,
+ul#listMenuRoot #nav_projects_current span.text,    ul#listMenuRoot #nav_projects span.text,
+ul#listMenuRoot #nav_projects2_current span.text,    ul#listMenuRoot #nav_projects2 span.text,
+ul#listMenuRoot #nav_contact_current span.text,   ul#listMenuRoot #nav_contact span.text,
+ul#listMenuRoot #nav_news_current span.text,      ul#listMenuRoot #nav_news span.text,
+ul#listMenuRoot #nav_people_current span.text,       ul#listMenuRoot #nav_people span.text { display: none; }
+
+
+

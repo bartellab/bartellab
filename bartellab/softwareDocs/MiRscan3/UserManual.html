@@ -1,0 +1,107 @@
+<html>
+
+<body>
+
+<b><u><a id="#UserManual">UserManual</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+
+
+
+<p>Mirscan runs on Linux and uses the Python interpreter.  Scripts are executed
+by typing <i>python</i> at the command line, followed by the name of the
+script that you are executing.</p>
+
+<p>The steps below indicate how one would execute a complete mirscan cycle, which
+has three steps: <b>(1) Training:</b> evaluation of the differences between a foreground and a
+background set of miRNA hairpins/candidates; <b>(2) Evaluation:</b> scoring of candidate
+hairpins based on the scoring matrices developed during training; <b>(3) Cutting:</b> elimination
+of candidates with low scores.  The user may bypass the first step by 
+<a href="Downloads.html">downloading</a> or sharing a pre-derived scoring matrix.  In 
+these cases, it is up to the user to evaluate the relevence of the scoring matrix being used
+to the candidate set being evaluated.</p>
+
+<br><br>
+
+<u>(1) Training</u>
+
+<br>
+
+<p><i>mirscanTrainer.py</i> is used to build a table of scores that reflect the frequencies
+of each returned value in the foreground (training) set of miRNA candidates versus the
+background (candidate) set.  The foreground set is defined by the specified 
+<a href="FileFormats.html#train"><i>.train</i>-format</a> file; the background set is defined
+by the set of <a href="FileFormats.html#fax"><i>.fax</i>-format</a> files specified in the 
+<i>.train</i> file.  The set of criteria being evaluated is defined by the contents of the
+specified <a href="FileFormats.html#criteria"><i>.py</i>-formatted criteria</a> file.  Because the
+number of background candidates is often far larger than it is practical or useful to evaluate in
+order to define the foreground versus background frequencies, a number of randomly-selected background
+hairpins to include can be specified as a command-line argument (if "0" is specified, then the entire
+background set will be included).  The scoring matrix will be written out to the specified 
+<a href="FileFormats.html#matrix"><i>.matrix</i>-format</a> file.</p>
+
+<ul>
+  <li>The general form of the <i>mirscanTrainer.py</i> command:</li>
+  <ul>
+    <li><i>python mirscanTrainer.py</i> [training file] [criteria file] [# background] [matrix file]</li>
+  </ul>
+</ul>
+
+
+<br><br>
+
+<u>(2) Evaluation</u>
+
+<br>
+
+<p><i>mirscanExecute.py</i> applies a scoring matrix and set of procedures to a set
+of miRNA candidates.  The set of candidates can be either the foreground set (defined by a
+<a href="FileFormats.html#train"><i>.train</i>-format</a> file) or a file from the background 
+set (defined by a <a href="FileFormats.html#fax"><i>.fax</i>-format</a> file).  The hairpins
+will be evaluated based on the set of criteria defined in the specified 
+<a href="FileFormats.html#criteria"><i>.py</i>-formatted criteria</a> file using scores from 
+the specified <a href="FileFormats.html#matrix"><i>.matrix</i>-format</a> file.
+<b>Note: the scoring matrix must have been built using the specified criteria file!</b>
+The scores will be written out to the specified <a href="FileFormats.html#scr"><i>.scr</i>-format</a>
+score file.</p>
+
+<ul>
+  <li>The general form of the <i>mirscanExecute.py</i> command:</li>
+  <ul>
+    <li><i>python mirscanExecute.py</i> [candidate file] [criteria file] [matrix file] [score file]</li>
+  </ul>
+</ul>
+
+
+
+<br><br>
+
+<u>(3) Cutting</u>
+
+<br>
+
+<p><i>score_cut.py</i> calculates a minimum passing score for miRNA candidates based
+on the distribution of scores among the foreground set and then makes a copy of the
+specified background file with those candidates whose scores are below the threshold 
+removed.  The foreground and background set scores are taken from two specified 
+<a href="FileFormats.html#scr"><i>.scr</i>-format</a> files.  The background 
+<a href="FileFormats.html#fax"><i>.fax</i>-format</a> file to be filtered and copied 
+can be specified along with the name of the new <a href="FileFormats.html#fax"><i>.fax</i>-format</a>
+file to be written.  If these two filenames are not given, then statistics will be
+printed concerning the threshold score and the number of candidates that would be cut,
+but no cut will be made. <b>Note: the specified background score file must contain scores
+from the specified background candidate file!</b></p>
+
+
+<ul>
+  <li>The general form of the <i>score_cut.py</i> command:</li>
+  <ul>
+    <li><i>python score_cut.py</i> [foreground score file] [background score file] <i>[background candidate file] [output candidate file]</i></li>
+  </ul>
+</ul>
+
+
+
+
+
+</body>
+
+</html>

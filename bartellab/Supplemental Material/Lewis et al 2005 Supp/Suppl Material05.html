@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<p><strong>Supplemental Data for:</strong><br>
+  Lewis et al., Cell 120, pp. 15&#8211;20 </p>
+<p>&nbsp;</p>
+<p><strong>Experimental Procedures and False-Positive Estimates</strong><br>
+  &nbsp;<br>
+  <strong>Algorithmic Description for TargetScanS</strong><br>
+  The TargetScanS algorithm is a simplified version of the TargetScan algorithm 
+  (Lewis et al., 2003) that searches multiple alignments to identify conserved 
+  W-C hexamer seed matches to the designated seed region of the miRNA (bases 2&#8211;7), 
+  flanked by either a W-C match to the m8 position of the miRNA or a conserved 
+  adenosine in the t1 position of the target, designated as the t1A anchor.<br>
+  &nbsp;<br>
+  <strong>Identification of Conserved 3' Pairing</strong><br>
+  A modified version of the TargetScan algorithm was used for the identification 
+  of predicted target sites with conserved pairing to the 3' portion of the miRNA 
+  (Figure 2).&nbsp; This algorithm proceeded by first finding matches to the miRNA 
+  seed that are W-C except at one position at which they have either a conserved 
+  G:U wobble or a conserved mismatched to the seed. This initial match was then 
+  extended with W-C pairing to m8 and by identifying the presence of a t1A anchor 
+  (W-C pairing to m1 was not scored). To identify pairing to the 3' portion of 
+  the miRNA, the miRNA and target site candidate that included the seed match 
+  and 15 mRNA bases upstream of this match were co-folded using subroutines imported 
+  from the RNAlib C program library of the Vienna RNA package (Hofacker et al., 
+  1994), while incorporating constraints on the pairing of the miRNA seed. This 
+  routine was repeated using aligned sequences from each vertebrate genome. Predicted 
+  target sites were accepted in the 3'-pairing analysis if in each genome they 
+  contained a contiguous helix of at least six basepairs (allowing for a single 
+  G:U wobble), even if in the different genomes this helix involved different 
+  3' residues of the miRNA.<br>
+  &nbsp;<br>
+  <strong>MicroRNA Datasets</strong><br>
+  A set of 117 human miRNAs (Supplemental Table S1) representing 148 human miRNA 
+  genes with membership in 62 conserved vertebrate miRNA families was assembled 
+  using the Rfam miRNA registry (<a href="http://www.sanger.ac.uk/Software/Rfam">http://www.sanger.ac.uk/Software/Rfam</a>) 
+  and established criteria (Ambros et al., 2003). MicroRNA families were defined 
+  by grouping miRNAs that share a common conserved seed region spanning nucleotides 
+  2&#8211;7 (although in any analysis involving m8 matches, miR-101 and miR-144 
+  miRNAs, which have the same seed, were regarded as separate families because 
+  they differ at m8, bringing to 63 the total number of families for these analyses). 
+  One representative from each miRNA family was required to be conserved with 
+  no more than one mismatch to the sequence for mouse, rat, dog, and chicken sequences 
+  from the UCSC genome browser multiz-8-way whole-genome alignments (Karolchik 
+  et al., 2003; Blanchette et al., 2004). In a number of cases, a related miRNA 
+  from the chicken genome could not be found in the multiz-8-way alignments, and 
+  a chicken miRNA from the miRNA registry that satisfied aforementioned alignment 
+  criteria was used in its place. To account for documented 5' heterogeneity of 
+  miR-124 (Lagos-Quintana et al., 2002), two forms of miR-124 were included separately 
+  among the miRNA families: the longer, less frequently observed form contains 
+  an additional 5' U relative to the shorter form and is listed as miR-124u (Supplemental 
+  Tables S1, S2, and S3).<br>
+  MicroRNA seed sequences corresponding to selected sets of families from the 
+  miRNA dataset were used in the analyses in Figures 1B&#8211;1G. These sets are 
+  listed in Supplemental Table S1 and described below:<br>
+  Panels 1B, 1F, and 1G:&nbsp; all 63 miRNAs families described above (62 in the 
+  case of Seed or Seed + t1A searches).<br>
+  Panel 1C:&nbsp; 48 miRNA families representing only those sequences that correspond 
+  to seed regions (nucleotides 2&#8211;7) with no overlapping relationship with 
+  a shifted seed sequence of another miRNA family (from the same superfamily) 
+  were chosen to ensure the proper register of seed matches and conservation in 
+  the surrounding bases.<br>
+  Panel 1D:&nbsp; 9 miRNA families corresponding to miRNA sequences that have 
+  a conserved m1 nucleotide other than U and do not have the same seed sequence 
+  as an miRNA with a U at m1.<br>
+  Panel 1E:&nbsp; 36 miRNA families corresponding to miRNA sequences that have 
+  a conserved m9 nucleotide other than U and do not have the same seed sequence 
+  as an miRNA with a U at m9.<br>
+  &nbsp;<br>
+  <strong>Genomic Datasets</strong><br>
+  The chromosomal coordinates of the 3' UTRs of all human genes from the &#8220;known 
+  genes&#8221; dataset (dated 7/2004) of the UCSC genome browser annotation database 
+  (http://genome.ucsc.edu) were used to define an initial dataset of human 3' 
+  UTR sequences. This set was augmented by taking the union of these regions with 
+  analogous regions defining the 3' UTRs of overlapping human Refseq mRNAs (Pruitt 
+  et al., 2003). The corresponding sequence coordinates were retrieved from the 
+  UCSC annotation database multiz-8-way multiple alignments (Blanchette et al., 
+  2004), containing aligned orthologous sequences from recent assemblies of the 
+  mouse (mm5, 5/2004), rat (rn3, 6/2003), dog (canFam1, 7/2004), chicken (galGal2, 
+  2/2004), Fugu (fr1, 8/2002), and zebrafish genomes (danRer1, 11/2003). When 
+  an annotated 3' UTR sequence overlapped an open reading frame, the overlap was 
+  masked to prevent contamination of the 3' UTR dataset with protein-coding sequences. 
+  Using the knownCanonical database from the UCSC genome browser, alternate isoforms 
+  of a common gene were identified. The longest 3' UTR among each set of multiple 
+  isoforms was chosen. The resulting dataset contained 17,850 aligned mammalian 
+  3' UTRs (human/mouse/rat/dog) and 10,938 aligned vertebrate 3' UTRs (human/mouse/rat/dog/chicken). 
+  For a few genes, a longer aligned mammalian 3' UTR isoform was not conserved 
+  in chicken while a shorter&nbsp; 3' UTR isoform was conserved to chicken. These 
+  rare cases resulted in a specific vertebrate 3' UTR isoform not being included 
+  in the mammalian set.&nbsp;<br>
+  The 5' UTR and ORF datasets were compiled using genomic coordinates from the 
+  human RefSeq mRNA database of the UCSC genome browser to retrieve regions of 
+  the multiz-8-way alignments in a manner analogous to the construction of the 
+  3' UTR datasets.&nbsp; Isoforms of a common gene were identified after mapping 
+  the knownCanonical database to RefSeq. As before, the single longest sequence 
+  was chosen from each set of isoforms.&nbsp; In addition, all ORF sequences were 
+  required to begin with a conserved start codon, and all protein-coding sequence 
+  was masked in the 5' UTR dataset. The resulting dataset of 5' UTRs contained 
+  6623 sequences, and the resulting dataset of ORFs contained 11,830 sequences.<br>
+  &nbsp;<br>
+  <strong>Density of Conservation in 3' UTRs</strong><br>
+  Analysis of Figure 1F:&nbsp; For each 3' UTR in the dataset used in the 5-genome 
+  analysis, the number of conserved 7-mers was counted and a measure of the density 
+  of conservation in that 3' UTR was calculated by determining the average number 
+  of conserved 7-mers per 1000 nt. The 3' UTRs were sorted by this density measure 
+  and then assigned to bins such that each bin contained a sufficient number of 
+  3' UTRs to give a total of ~8000 conserved 7-mers per bin.&nbsp;<br>
+  Analysis of Figure 1B (in islands):&nbsp; The aligned 3' UTR sequences within 
+  250 nt 5' and 3' of a conserved seed match were examined to determine a local 
+  density of conservation.&nbsp; All target sites located in a ~500-nt region 
+  with fewer than a total of 50 conserved heptamers in the upstream and downstream 
+  windows were designated as occurring in islands of conservation. For cases where 
+  a 3' UTR boundary occurred within 250 nt, the number of conserved 7-mers per 
+  1000 nt was calculated and those sites with a local density of less than 100 
+  conserved 7-mers per 1000 nt were included in the islands of conservation set.<br>
+  &nbsp;<br>
+  <strong>Generation of Control Sequences</strong><br>
+  Mononucleotide, dinucleotide, hexamer, heptamer, and octamer counts and frequencies 
+  were determined for all human 3' UTR sequences. Sets of control sequences were 
+  designed for each seed match sequence and each extended-match variant (SeedM 
+  + m8, SeedM + t1A, etc.) so as to preserve the expected frequency of random 
+  matching between miRNA seed sequences and complementary 3' UTR sequences. All 
+  hexamers, heptamers, heptamers, and octamers were examined to identify suitable 
+  control sequences for each miRNA seed (or augmented seed) that preserve (1) 
+  E(SM), the 1st order Markov probability of the seed match, and (2) O(SM), the 
+  observed count of seed matches in human UTRs within a total margin of&nbsp; 
+  &plusmn;7.5%. As described in Lewis et al. (2003), for a miRNA seed match heptamer 
+  S1,S2,S3,S4,S5,S6,S7, E(SM) was equal to (PS1&middot;PS1,S2&middot;PS2,S3&middot;PS3,S4&middot;PS4,S5&middot;PS5,S6&middot;PS6,S7) 
+  where PS1 was the frequency of the nucleotide S1 and PSk,Sk+1 was the conditional 
+  frequency of the nucleotide Sk+1 given Sk at the previous position, determined 
+  by counting dinucleotides in the UTR sequences. Sequences corresponding to known 
+  miRNA seeds, as well as sequences known to function in mRNA processing, such 
+  as the polyadenylation signals AAUAAA and AUUAAA and the consensus RNA binding 
+  sequences of the puf protein family (White et al., 2001), were restricted from 
+  use in the control sets. All possible control sequences that met these criteria 
+  were assigned to each distinct miRNA seed sequence represented in the dataset. 
+  For each miRNA analyzed, an estimate of the false-positive predictions was calculated 
+  by averaging the results of each of its control sequences.&nbsp; These averages 
+  were then summed to estimate the number of false positives for a set of miRNAs. 
+  A few miRNAs were assigned only five control sequences, but most had many more. 
+  For the analysis of target sites with pairing to the 3' end of the miRNA, control 
+  sequences were generated by simply merging each controlled seed sequence with 
+  the remaining ~13&#8211;16 nt region of the real miRNA that follows the seed.<br>
+  For the analysis of miRNA target sites with a single G:U pair disrupting the 
+  seed match (Figure 2), control sequences were screened further so as to contain, 
+  on average, a similar number of instances of the 4-mer UGUA as the corresponding 
+  real miRNAs because this 4-mer is the core conserved element of the PUM2 binding 
+  site consensus (White et al., 2002). This extra measure was necessary for the 
+  G:U analysis due to the fact that the set of 6-mers corresponding to seed matches 
+  disrupted with a single G:U are enriched for the UGU 3-mer relative to 6-mers 
+  of comparable abundance in a single genome. The enrichment for UGU is a consequence 
+  of the enrichment for U&#8217;s and G&#8217;s obtained when specifying that 
+  seed:seed match duplexes must be disrupted by a G:U pair.&nbsp;<br>
+  To calculate the standard deviation of the number of mRNAs that are predicted 
+  to be targets of a single cohort of control sequences, in which a single cohort 
+  set consisted of one control sequence per real miRNA, a special procedure was 
+  devised that accounted for the varying number of control sequences assigned 
+  to each real miRNA in our set. The total number of cohort sets used was defined 
+  as N, which was equal to the maximum number of cohorts used for a single real 
+  miRNA in the set under consideration. The 1st listed control for each miRNA 
+  was assigned to cohort set 1, the 2nd to cohort set 2, &#8230; , the Nth to 
+  cohort set N. When considering cohort set n and a real miRNA with m control 
+  sequences in which m &lt; n, the (n mod m)th control sequence was re-chosen 
+  to be included in the nth cohort set, thus enabling the construction of N total 
+  cohort sets.&nbsp; For each cohort set, the number of predicted target mRNAs 
+  was determined, and the standard deviation of the mean was calculated. This 
+  single standard deviation value corresponds to the length of the error bars 
+  above and below the average noise level in the predicted targets plots (Figures 
+  1B, 1D, 1E, 1G, 2A, and 2B).<br>
+  &nbsp;<br>
+  <strong>Analysis of Gene Ontologies</strong><br>
+  Gene ontologies were assigned to human genes from the UCSC known genes database 
+  by crossreferencing with GO identifiers listed in the annotation database of 
+  the UCSC genome browser (<a href="http://hgdownload.cse.ucsc.edu/">http://hgdownload.cse.ucsc.edu/</a>). 
+  The Gene Ontology Consortium database (Harris et al., 2004) was retrieved from 
+  http://www.geneontology.org and biological process ontologies were compiled 
+  for all predicted target genes of the miRNAs (five-genome SeedM + m8M + t1A 
+  analysis) and the corresponding octamer control sequences. As in previous signal-to-noise 
+  calculations, the hits to GO categories were averaged to determine a noise estimate 
+  for an octamer control set and GO category.<br>
+  &nbsp;<br>
+  <strong>Discussion Regarding Control Sequences for Estimating False Positives</strong><br>
+  Different approaches have been used to generate control sequences by which to 
+  estimate the number of false-positive miRNA target predictions. Our current 
+  approach is described above and resembles that which we used previously in mammalian 
+  predictions (Lewis et al., 2003). To evaluate the miRanda predictions, John 
+  et al. (2004) use an alternative approach to generate control sequences, wherein 
+  they shuffle (randomly permute) the miRNA. However, when analyzing vertebrate 
+  genomes, repeating a target prediction procedure with random shuffles is prone 
+  to underestimate the false positives, thereby overestimating the predictive 
+  accuracy of the algorithm (Lewis et al., 2003).<br>
+  Pitfalls of using random shuffles to estimate the false positives can be illustrated 
+  with the miR-125 seed heptamer (CCCUGAG, 6-nt seed plus m8). This heptamer has 
+  663 reverse-complement matches in human UTRs, whereas, on average, random shuffles 
+  have only 205 hits (Supplemental Table S4). It is unlikely that the difference 
+  of 458 hits represents the number of functional target sites for miR-125. Instead, 
+  this difference can be readily explained as an artifact of the shuffled sequences 
+  containing an oligonucleotide composition that differs from that of the miRNAs. 
+  For example, the miRNAs, like the UTRs and vertebrate genomes as a whole, contain 
+  few CG dinucleotides. Therefore (since CG is palindromic), random shuffles that 
+  create CG dinucleotides have far fewer hits to the UTRs than does the authentic 
+  seed heptamer (Supplemental Table S4). To avoid this artifact that would unduly 
+  favor the assessment of any algorithm that uses pairing or predicted duplex 
+  stability for prediction, it is better to pick controls sequences that match 
+  the relevant features of the authentic miRNAs, including compositional features 
+  (Lewis et al., 2003). For the miR-125 heptamer, the sequence CAGUGCC would be 
+  a more appropriate control than the typical shuffled derivative. The same principles 
+  can be used to generate control sequences that are the same length as the miRNAs 
+  (Lewis et al., 2003).<br>
+  &nbsp;<br>
+  <strong>Comments on Overlapping Predictions</strong><br>
+  John et al. (2004) report that 46% of 400 target genes predicted by TargetScan 
+  (Lewis et al., 2003) overlapped with the targets predicted by miRanda. However, 
+  in most cases miRanda and TargetScan paired these UTRs to different miRNAs, 
+  and the actual overlap of predicted regulatory relationships was only 7%.<br>
+  How might the 18% overlap of the miRanda predictions with the mammalian TargetScanS 
+  predictions be rationalized, given that a high fraction of miRanda predictions 
+  were estimated to be false positives? The set of miRanda predictions that overlap 
+  with TargetScanS predictions are enriched for highly conserved UTRs relative 
+  to the full set of 4-genome TargetScanS predictions. Having observed that TargetScanS 
+  is less accurate when applied to UTRs with higher levels of background conservation 
+  (Figure 1F), we would expect this overlapping set to have a signal:noise lower 
+  than the 2.2:1 signal:noise calculated for the set of more than 22,000 mammalian 
+  TargetScanS predictions. In addition to being enriched in lower-confidence TargetScanS 
+  predictions, this overlapping set would be expected to be enriched in higher-confidence 
+  miRanda predictions. This is because the overlap was determined using miRanda 
+  predictions for the subset of miRNAs used in the TargetScanS analysis, which 
+  were the more broadly conserved miRNAs and previously have been shown to yield 
+  higher signal:noise than do the less broadly conserved miRNAs (Lewis et al., 
+  2003).<br>
+  &nbsp;<br>
+  <strong>The Role of Evolutionary Conservation in miRNA Target Identification</strong><br>
+  An ultimate goal of miRNA target predictions will be to reliably identify authentic 
+  regulatory interactions without relying on conservation; this would find the 
+  regulatory interactions specific to each species. However, neither TargetScan 
+  nor any of the other target prediction methods are close to achieving this goal. 
+  In the meantime, we favor the approach of choosing the control sequences such 
+  that they give the same number of hits in a single genome as do the authentic 
+  miRNAs, and then relying on conservation of the sites in multiple genomes to 
+  distinguish the signal from the noise (e.g., Figure 1G).&nbsp; Nonetheless, 
+  we recognize that this approach is conservative in that it will overestimate 
+  the noise to some extent, depending on both how well the algorithm predicts 
+  authentic targets in a single genome and the degree to which there has been 
+  selective pressure for transcripts to avoid miRNA complementarity.&nbsp;<br>
+  &nbsp;<br>
+  <strong>References</strong><br>
+  Ambros, V., Bartel, B., Bartel, D.P., Burge, C.B., Carrington, J.C., Chen, X., 
+  Dreyfuss, G., Eddy, S.R., Griffiths-Jones, S., Marshall, M., et al. (2003). 
+  A uniform system for microRNA annotation. RNA 9, 277&#8211;279.<br>
+  Blanchette, M., Kent, W.J., Riemer, C., Elnitski, L., Smit, A.F., Roskin, K.M., 
+  Baertsch, R., Rosenbloom, K., Clawson, H., Green, E.D., et al. (2004). Aligning 
+  multiple genomic sequences with the threaded blockset aligner. Genome Res. 14, 
+  708&#8211;715.<br>
+  Enright, A.J., John, B., Gaul, U., Tuschl, T., Sander, C., and Marks, D.S. (2003). 
+  Genome Biol. 5, R1.<br>
+  Harris, M. A., Clark, J., Ireland, A., Lomax, J., Ashburner, M., Foulger, R., 
+  Eilbeck, K., Lewis, S., Marshall, B., Mungall, C., et al. (2004). The Gene Ontology 
+  (GO) database and informatics resource. Nucleic Acids Res. 32 Database issue, 
+  D258&#8211;D261.<br>
+  Hofacker, I.L., Fontana, W., Stadler, P.F., Bonhoeffer, S., Tacker, M., and 
+  Schuster, P. (1994). Fast folding and comparison of RNA secondary structures. 
+  Monatshefte f Chemie 125, 167&#8211;188.<br>
+  John, B., Enright, A.J., Aravin, A., Tuschl, T., Sander, C., and Marks, D.S. 
+  (2004). Human MicroRNA targets. PLoS Biol. 2, e363.<br>
+  Karolchik, D., Baertsch, R., Diekhans, M., Furey, T. S., Hinrichs, A., Lu, Y. 
+  T., Roskin, K. M., Schwartz, M., Sugnet, C. W., Thomas, D. J., et al. (2003). 
+  The UCSC Genome Browser Database. Nucleic Acids Res. 31, 51&#8211;54.<br>
+  Kaspryzk, A., Keefe, D., Smedley, D., London, D., Spooner, W., et al. (2004) 
+  EnsMart: A generic system for fast and flexible access to biological data. Genome 
+  Res. 14, 160&#8211;169.<br>
+  Lagos-Quintana M., Rauhut R., Yalcin A., Meyer J., Lendeckel W., Tuschl T. (2002).&nbsp; 
+  Identification of tissue-specific microRNAs from mouse. Curr. Biol. 12, 735&#8211;739.<br>
+  Lewis, B.P., Shih, I., Jones-Rhoades, M.W., Bartel, D.P., and Burge, C.B. (2003). 
+  Prediction of mammalian microRNA targets. Cell 115, 787&#8211;798.<br>
+  Pruitt, K.D., Tatusova, T., and Maglott, D.R. (2003). NCBI Reference Sequence 
+  project: update and current status. Nucleic Acids Res. 31, 34&#8211;37.<br>
+  White, E.K., Moore-Jarret, T., Ruley, H.E. (2001). PUM2, a novel murine puf 
+  protein, and its consensus RNA-binding site. RNA&nbsp; 7, 1855&#8211;1866.<br>
+  &nbsp;<br>
+  &nbsp;<br>
+  <a href="FigureS1.pdf">Supplemental 
+  Figure S1.&nbsp; An Illustration, Modeled after Figure 2 of John et al. (2004), 
+  Showing How Artifactual Signal above Noise Can Be Compounded when Requiring 
+  Multiple Sites per UTR</a><br>
+  The height of each bar indicates the number of human transcripts containing 
+  a given number of predicted target sites. The 21-nt segments immediately upstream 
+  or downstream of miRNA hairpins were compiled as a set of fictitious miRNAs 
+  that will yield only false-positive predictions.&nbsp; TargetScanS analysis 
+  was performed using these fictitious RNAs to generate a large set of predicted 
+  target sites (dark blue bars).&nbsp; When using controlled shuffled miRNAs, 
+  this estimate matched the number of predictions from these fictitious miRNAs 
+  (black bars).&nbsp; When using simple shuffles as the control sequences, the 
+  estimate of the noise was substantially lower (light blue bars), giving an errantly 
+  high signal above noise.&nbsp; This artifact was compounded when asking for 
+  more than one conserved hit per UTR.<br>
+  &nbsp;<br>
+  &nbsp;<br>
+  <a href="LewisetalSTable1.xls">Supplemental 
+  Table S1. Supplemental Table S1.&nbsp; Human microRNAs Used for Target Prediction</a><br>
+  &nbsp;<a href="LewisetalSTable2.xls"><br>
+  Supplemental Table S2. Supplemental Table S2. Predicted targets conserved in 
+  five vertebrates (Figure 1B)</a><br>
+  &nbsp;<br>
+  <a href="LewisetalSTable3.xls">Supplemental 
+  Table S3. Supplemental Table S3. Predicted Targets Conserved in Human, Mouse, 
+  Rat and Dog</a><br>
+  &nbsp;<br>
+  <a href="Supplemental%20Table%20S4.pdf">Supplemental 
+  Table S4. Matches for the miR-125 Seed Heptamer and Its Shuffled Derivatives</a><br>
+</p>
+<p>&nbsp;</p>
+</body>
+</html>

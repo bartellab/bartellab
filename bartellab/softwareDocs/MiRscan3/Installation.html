@@ -1,0 +1,29 @@
+<html>
+
+<body>
+
+<b><u><a id="Installation">Installation</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+
+<br><br><br>
+
+<p>Mirscan runs on Linux and uses the <a href="http://python.org">Python</a> interpreter.  It is compatible with
+Python 2.3.4 and will likely work with most versions of Python; however, because the Python programming language
+is not developed with a strong "do-no-harm" philosophy, it is possible that previous or future versions of Python
+will be incompatible with mirscan as implemented here.</p>
+
+<p>The core scripts of the mirscan system can be downloaded <a href="Downloads.html">here</a>.  These scripts
+should be placed into one directory, and all mirscan jobs should be executed with that directory as the 
+current working directory.</p>
+
+<p>The current implementation of <i>mirscanModule.py</i> requires that <i>RNAfold</i> from the Vienna RNA package
+be installed on the host computer and be callable from the command line.  That software is available 
+<a href="http://www.tbi.univie.ac.at/~ivo/RNA/">here</a>.  Alternatively, the implementation of the <i>get_folds</i>
+function in <i>mirscanModule.py</i> can be altered to use some other tool to determine the mfe secondary structures
+for a set of nucleic acid sequences.</p>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+/** MOVE TO FACULTY BIOS */
+
+#bio_degrees .vevent .summary { font-size: 12px;}
+#bio_degrees .vevent { line-height: 16px}
+#bio_degrees .vevent {margin-bottom: 3px; padding-bottom: 3px; border-bottom: 0px} 
+#bio_degrees .vevent .small {font-size: 11px;}
+#bio_degrees .vevent .dtend {padding-left: 2px}
+
+
+div#content .boxes_main h3, div#content .boxes_hidden h3 { color: #485D00; padding: 5px; font-weight: 900; font-size: 14px; border-bottom: #485D00 solid 1px;}
+div#content .boxes_main h4, div#content .boxes_hidden h4  { color: #682069; font-weight: bold; font-size: 13px; Line-height: 1.5em;  margin: 0px;}
+div#content .boxes_main ul, div#content .boxes_hidden ul { margin-top: 0px; list-style-type: square; list-style-position: outside; }
+
+div.bio_bio form input#title, div.bio_bio form input#email,div.bio_bio form input#phone, div.bio_bio form ul li input, div.boxes_main form ul li input, div.boxes_hidden form ul li input {width:465px;}
+div#content #boxes_main textarea, div#content #boxes_hidden textarea { width:465px; font-family: Arial, Helvetica, sans-serif;  font-size: 11px; }
+
+div#content hr.facultyEdit {border: none 0; border-top: 1px solid #000; border-bottom: 0px dashed #ccc; ; height: 2px; margin: 13px auto 0 0; }
+
+
+/* Outermost container and body */
+
+body { font-family: Arial, Helvetica, Verdana, Sans-Serif; background-color: white; margin-top:0px !important; font-size: 12px; color: Black; letter-spacing: 0px;}
+div#container {
+	border: 1px solid #e0e0e2;
+	border-top: 1px;
+	color: Black;
+	background-color: #FFFFFF;
+	position: relative;
+}
+div#container2 {
+	border: 0px solid #e0e0e2;
+	border-top: 0px;
+	color: Black;
+	background-color: #FFFFFF;
+	position: relative;
+}
+
+div#apDiv2 {
+	position:absolute;
+	left:752px;
+	top:42px;
+	width:351px;
+	height:48px;
+	z-index:1;
+}
+
+/** container size and positioning */
+div#container {	MARGIN: 0px auto 0px; WIDTH: 900px; }
+div#container2 {	MARGIN: 0px auto 0px; WIDTH: 900px; }
+
+/* TOP HEADER */
+
+div#container dev#header { height: 63px; background-color: white; background-repeat: no-repeat; }
+div#container div#header div#skipmenu { display: none; }
+
+div#container div#header      {
+    width: 600px;
+	height: 63px;
+	position: relative; 
+	left: 20px;
+	top: 10px;
+	background-repeat: no-repeat;
+	background-color: #FFFFFF;
+}
+div#container div#header ul   { width: 197px; height: 63px; margin: 0px; padding: 0px; list-style-type: none; }
+div#container div#header ul a {
+	width: 693px;
+	height: 58px;
+	padding: 0px 0px 0px 0px;
+}
+div#container div#header ul a {
+	position: absolute;
+	top: 5px;
+	display: block;
+	left: 29px;
+}
+div#container div#header ul a span { display: none; }
+div#container div#header ul li   { list-style-type: none; }
+
+div#container div#headerlinks         {
+	position: absolute;
+	top: 81px;
+	left: 487px;
+	width:275px;
+	font-size: 11px;
+	font-size: 10px;
+}
+div#container div#headerlinks a       { position: relative; top: 0px; background-color: inherit; color: #682069; font-weight: bold; text-decoration: none; padding: 0px 5px 0px 7px; }
+div#container div#headerlinks a:hover { text-decoration: none; }
+div#container div#headerlinks input   { margin-left: 9px; width: 90px; padding-left: 2px; border: 1px solid black; background-color: inherit; color: #A479A5; font-size: 9px; }
+div#container div#headerlinks input[type=text]:focus { color: #000;}
+div#container div#headerlinks.nosearch { left: 595px; width:275px; font-size: 11px; font-size: 10px;} 
+
+/** contents */
+div#content { min-height: 40px; z-index: 0px; width: 650px; font-family: Arial, Helvetica, Verdana, Sans-Serif; font-size: 12px; line-height: 17px; float:right; padding-right: 70px; margin-top: 40px; margin-bottom: 20px}
+div#content h1 { color: #682069; font-weight: bold; font-size: 14px; margin-top: 10px}
+div#content h2 { color: #682069; font-weight: bold; vertical-align: middle; font-size: 20px; margin-left: 5px; margin-top: 5pt; line-height: 17px;}
+div#content h3 { color: black; font-weight: bold; vertical-align: middle; font-size: 17px; margin-left: 10px; line-height: 10px; margin-top: 5px;}
+div#content h4 { color: #682069; font-weight: bold; font-size: 14px; margin-top: 15px}
+div#content h5 { color: #000;  z-index: 1500; font-size: 13px; font-weight: 900; margin: 0px; padding: 5px 0px 5px 0px; border-bottom: 1px solid #A4A597}
+div#content table { }
+div#content td { color: #000; margin-bottmon:100px; margin-top:100px; vertical-align: top;}
+div#content a { text-decoration: none; color: #682069 }	
+div#content a:hover { text-decoration: none; color: #CCCC33; }
+div#content hr { color: #fff; border:0px; border-top: 1px solid #A4A597; }
+
+
+/* Pillars (bottom horizontal links) and Whitehead Logo */
+div#pillars { font-family: Arial, Helvetica, Verdana, Sans-Serif;}
+div#pillars { clear:both; position: relative; top: +32px; color: Green; background: #f1f1f3; border-top: 1px solid #e20e20e20; border-bottom: 1px solid #e0e0e2; width: 768px; height: 32px; margin: 0px; padding: 0px; }
+div#pillars ul { list-style-type: none !important; margin: 0px; padding: 0px;  }
+div#pillars li { float: left; padding: 7px 10px 0px 5px; height: 26px; margin: 0px; list-style-type: none !important; }
+div#pillars li a {padding: 10px 20px 10px 10px; background-color:inherit; color: #A4A597; text-decoration: none; text-transform:uppercase; font-weight: bold; font-size: 10px; } 
+div#pillars li a:hover { color: #682069;  }
+
+div#nyu_link      { width: 197px; height: 26px; position: relative; top: 0px; left: 569px; }
+div#nyu_link ul   { width: 80px; height: 26px; margin: 0px; padding: 0px; list-style-type: none !important; }
+div#nyu_link ul li { list-style-type: none !important; }
+div#nyu_link ul a { width: 197px; height: 26px; margin-top: 1px; padding: 0px 0px 7px 0px;}
+div#nyu_link ul a { position: absolute; top: 0px; display: block; left: 0px; }
+div#nyu_link ul a span { display: none; }
+
+/* reference */
+div#reference { margin-top: 5pt; margin-bottom: 5pt;}
+/* Copyright Footer */
+div#copyright { padding: 14px 0px 10px 0px; background: White; color: inherit; width: 768px; font-size: 9px; text-align: center; line-height: 13px;}
+
+/* School Wide Colors */
+.purple {color: #682069; }
+.green {color: #485D00; }
+.highlight {color: #682069; }
+
+
+.bio_bio img.photo {float:right; padding: 4px; max-width:280px; max-height:400px;
+				height: expression(this.height > 280 ? 280: true); width: expression(this.width > 280 ? 280: true); }
+
+
+
+/** Sidebar Body */
+
+div.body#sidebar {margin: 0px ! important; width: 100% !important; float: none;}

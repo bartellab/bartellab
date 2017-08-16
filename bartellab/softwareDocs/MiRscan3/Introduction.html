@@ -1,0 +1,55 @@
+<html>
+
+<body>
+
+<b><u><a id="Introduction">Introduction</a></u></b> (back to the <a href="http://web.wi.mit.edu/bartel/pub/">Bartel lab homepage</a>)
+
+<p>MicroRNAs (miRNAs) are small, non-coding RNAs of ~23 nt that repress the translation of 
+messenger RNAs by basepairing with their 3' UTRs.  The mature RNA species are derived from 
+primary transcripts that can fold into hairpin secondary structures for recognition and
+cleavage by the RNase III enzymes Drosha and Dicer.  While other requirements of the primary
+transcripts are somewhat mysterious, all miRNAs derive from the hairpin portions of those
+transcripts.  MicroRNA gene annotation has therefore been simplified as the identification
+of a mature miRNA sequence along with definition of the hairpin from which it is derived.</p>
+
+<p>Mirscan is intended to identify the most microRNA-like hairpin sequences from an arbitrary
+set of candidates.  It does so by comparing a set of features in a foreground set of previously
+annotated miRNA hairpins to those features of a background set of candidates.  Those candidates
+that most resemble the foreground set can be retained, while the rest can be discarded.  This
+process of discarding candidates from a background set that bear the least resemblence to the
+foreground set can be repeated iteratively, as each repetition will change the properties of the
+background set and thereby adjust the relative importance of various features in distinguishing
+between foreground and background.</p>
+
+
+<ul>
+  <li>Design</li>
+  <ul>
+    <li><a href="RuntimeStructure.html">Runtime Structure</a></li>
+    <li><a href="ModuleStructure.html">Module Structure</a></li>
+    <li><a href="Reflection.html">Reflection</a></li>
+  </ul>
+  <li><a href="UserManual.html">User Manual</a></li>
+  <ul>
+    <li><a href="Installation.html">Installation</a></li>
+    <li><a href="Testing.html">Testing</a></li>
+  </ul>
+  <li>Appendix</li>
+  <ul>
+    <li><a href="FileFormats.html">File Formats</a></li>
+  </ul>
+  <li><a href="Downloads.html">Downloads</a></li>
+  <li>Bug fix </li>
+  <ul>
+  <li>If you are having this problem: [<a href="report1.html" target="_blank">Traceback</a>] try this update for mirscanModule.py [<a href="mirscanModule.py.gz">download</a>].</li>
+   </ul>
+</ul>
+
+<p>Software and documentation written by J. Graham Ruby.  For further discussion, see the supplemental
+methods document that accompanies 
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=ShowDetailView&TermToSearch=17989254&ordinalpos=1&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_RVDocSum">
+Ruby et al., "Evolution, biogenesis, expression, and target predictions 
+of a substantially expanded set of <i>Drosophila</i> microRNAs". Genome Research, 2007.</a></p>
+
+</body>
+</html>

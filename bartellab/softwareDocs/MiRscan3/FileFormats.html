@@ -1,0 +1,278 @@
+<html>
+
+<body>
+
+<b><u><a id="#Formats">Formats</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+<ul>
+  <li><a href="#fax">.fax</a></li>
+  <li><a href="#train">.train</a></li>
+  <li><a href="#matrix">.matrix</a></li>
+  <li><a href="#scr">.scr</a></li>
+  <li><a href="#criteria"><i>criteria</i></a></li>
+</ul>
+
+
+<br><br><br><br>
+<a id="fax"><u>.fax candidate files</u></a>
+
+<p>These files superficially resemble Fasta-format files, but the differences are very important.  Each entry 
+begins with a carrotted line, as in Fasta files.  Whatever text follows the carrot is the name of the entry, 
+and must be unique within the given file.  The lines that follow contain the sequences to be evaluated as 
+candidates.  This format supports multiple-sequence candidates, so each line that follows may contain only a 
+single sequence.  A key indicating the organism/genome assembly of origin preceeds each sequence, and the 
+organism key and sequence are separated by a tab.</p>
+
+Example:<br>
+<pre>
+&gt;mir-2a-2
+dm2	ATCTAAGCCTCATCAAGTGGTTGTGATATGGATACCCAACGCATATCACAGCCAGCTTTGATGAGCTAGGAT
+dp3	ATCTAAGCCTCATCAAGTGGTTGTGATATGGATACCCAACGCATATCACAGCCAGCTTTGATGAGCTAGGAT
+&gt;mir-2b-1
+dm2	CTTCAACTGTCTTCAAAGTGGCAGTGACATGTTGTCAACAATATTCATATCACAGCCAGCTTTGAGGAGCGTTGCGG
+dp3	CTGCGACGCTCTTTAAAGTGGCGGTGACGTGTTGGTAATAATATTCATATCACAGCCAGCTTTGAGGAGCGTTGCGG
+&gt;mir-3
+dm2	GATCCTGGGATGCATCTTGTGCAGTTATGTTTCAATCTCACATCACTGGGCAAAGTGTGTCTCAAGATC
+dp3	GATCCTGGGATGCATTTTGTGCAGTTATGTCTACGTGATCATCCTCATCACTGGGCAAAGTGTGTCTCAGGAT
+</pre>
+
+Requirements:<br>
+<table>
+<tr><td valign=top>-</td><td>All keys are unique within a file and may not contain spaces.</td></tr>
+<tr><td valign=top>-</td><td>The set of organism/genome assembly keys is consistent 
+across all entries in a file, and is also consistant across all files that are to be used for training 
+or scoring in a single round of evaluation/elimination.</td></tr>
+<tr><td valign=top>-</td><td>Lines beginning with a '#' will be ignored.</td></tr>
+</table>
+
+
+<br><br><br><br><br>
+<a id="train"><u>.train foreground files</u></a>
+
+<p>These files define a foreground and a background set of miRNA hairpins.  The foreground set is defined within
+the file, while the background set is defined by references withing this file to a set of 
+<a href="#fax"><i>.fax</i>-format</a> files.  Each line of the file is started with a combination of letters:</p>
+
+<ul>
+  <li><b>b</b> lines indicate a background file.  The 'b' and the
+      filename are separated by a space or tab. 'b' lines are required if the file is
+      to be used for training, but not if it is only being used to store candidates.</li>
+  <li><b>cn</b> lines indicate the name of a miRNA/candidate.  The 'cn'
+      is separated from the name by a space or tab.  The name may not 
+      contain spaces.  The 'cn' line for a miRNA/candidate must preceed
+      its 'cm' and 'ch' lines.</li>
+  <li><b>cm</b> lines contain the organism key and sequence identity of a mature miRNA. The 'cm', organism
+      key and sequence are separated by spaces or tabs.  The sequence may be in upper- or lower-case
+      nucleotide letters: 'A', 'T', 'C', 'G', 'U', and 'N' ('N' indicates an unknown identity).  'U' and
+      'T' will be treated equivalently.  The sequence of the mature miRNA/candidate must be found in the
+       candidate's 'ch' entry (hairpin sequence) with the same organism key.</li>
+  <li><b>ch</b> lines contain the organism key and sequence identy of a miRNA hairpin precursor.  The 'ch', 
+      organism key and sequence are separated by spaces or tabs.  The sequence may be in upper- or lower-case
+      nucleotide letters: 'A', 'T', 'C', 'G', 'U', and 'N' ('N' indicates an unknown identity).  'U' and
+      'T' will be treated equivalently.  The hairpin sequence must contain the mature miRNA/candidate sequence 
+       found in the candidate's 'cm' entry with the same organism key.</li>
+</ul>
+
+Example:<br>
+<pre>
+b backgroundFile1.fax
+b backgroundFile2.fax
+b backgroundFile3.fax
+cn      mir-2a-2
+cm      dm2     uaucacagccagcuuugaugagc
+ch      dm2     ATCTAAGCCTCATCAAGTGGTTGTGATATGGATACCCAACGCATATCACAGCCAGCTTTGATGAGCTAGGAT
+cm      dp3     uaucacagccagcuuugaugagc
+ch      dp3     AUCUAAGCCUCAUCAAGUGGUUGUGAUAUGGAUACCCAACGCAUAUCACAGCCAGCUUUGAUGAGCUAGGAU
+cn      mir-2b-1
+cm      dm2     uaucacagccagcuuugaggagc
+ch      dm2     CTTCAACTGTCTTCAAAGTGGCAGTGACATGTTGTCAACAATATTCATATCACAGCCAGCTTTGAGGAGCGTTGCGG
+cm      dp3     uaucacagccagcuuugaggagc
+ch      dp3     CUGCGACGCUCUUUAAAGUGGCGGUGACGUGUUGGUAAUAAUAUUCAUAUCACAGCCAGCUUUGAGGAGCGUUGCGG
+cn      mir-3
+cm      dm2     ucacugggcaaagugugucuca
+ch      dm2     GATCCTGGGATGCATCTTGTGCAGTTATGTTTCAATCTCACATCACTGGGCAAAGTGTGTCTCAAGATC
+cm      dp3     ucacugggcaaagugugucuca
+ch      dp3     GAUCCUGGGAUGCAUUUUGUGCAGUUAUGUCUACGUGAUCAUCCUCAUCACUGGGCAAAGUGUGUCUCAGGAU
+</pre>
+
+Requirements:<br>
+<table>
+<tr><td valign=top>-</td><td>All names are unique within a file and may not contain spaces.</td></tr>
+<tr><td valign=top>-</td><td>The set of organism/genome assembly keys is consistent 
+across all entries in a file, and is also consistant across all of the listed background files.</td></tr>
+<tr><td valign=top>-</td><td>Each miRNA/candidate entry begins with a 'cn' line and is followed by a
+series of 'ch' and 'cm' lines.</td></tr>
+<tr><td valign=top>-</td><td>Each organism key for each miRNA/candidate must have both a 'cm' and a 'ch' line.</td></tr>
+<tr><td valign=top>-</td><td>Note that if this format is being used to store candidates and not for training, 
+the 'cm' and 'b' lines may be left out.</td></tr>
+<tr><td valign=top>-</td><td>Lines beginning with a '#' will be ignored.</td></tr>
+</table>
+
+
+
+
+<br><br><br><br><br>
+<a id="matrix"><u>.matrix scoring matrix files</u></a>
+
+<p>These files store the scores that are associated with each possible
+returned value for each feature that a particular <a href="#criteria"><i>criteria</i></a>
+file evaluates.  In the file, every non-indented line has the name of a feature/criterion.
+The tab-indented lines that follow each have an allowed values for that feature, then another tab, 
+then the score associated with that value for that feature.  These are the required fields, but the
+<i>.matrix</i> files generated by <i>mirscanTrainer.py</i> also contains additional information in
+additional tab-delimited columns; for each value, the number of instances in the foreground and 
+background sets, respectively, then the frequencies of the value in the foreground and background
+sets, respecctively, are provided.</p>
+
+Example:<br>
+<pre>
+# number = 20, fcount = 24
+# training file: TestData/dme-dps.train
+# Fri Oct 26 00:37:06 2007
+# org keys:     dm2     dp3
+nuc9_s1
+        A       0.593   6       3       0.25    0.15
+        T       -0.384  7       8       0.292   0.4
+        C       0.371   5       3       0.208   0.15
+        G       -0.214  6       6       0.25    0.3
+        N       -0.214  0       0       0.0     0.0
+nuc9_s2
+        A       1.008   6       2       0.25    0.1
+        T       -0.536  7       9       0.292   0.45
+        C       0.371   5       3       0.208   0.15
+        G       -0.214  6       6       0.25    0.3
+        N       -0.214  0       0       0.0     0.0
+bp_matrix_C_n-8
+        paired  0.952   15      6       0.625   0.3
+        unpaired        -0.826  9       14      0.375   0.7
+bp_matrix_C_n-7
+        paired  0.952   15      6       0.625   0.3
+        unpaired        -0.826  9       14      0.375   0.7
+bp_matrix_C_n-6
+        paired  0.344   14      9       0.583   0.45
+        unpaired        -0.367  10      11      0.417   0.55
+loop_dis_G
+        0       -2.659  0       8       0.0     0.4
+        1       -1.589  0       0       0.0     0.0
+        2       -0.944  0       1       0.0     0.05
+        3       -0.43   0       0       0.0     0.0
+        4       -0.43   0       0       0.0     0.0
+        5       -0.835  0       1       0.0     0.05
+        6       -0.411  0       0       0.0     0.0
+        7       -0.207  0       0       0.0     0.0
+        8       -0.43   0       0       0.0     0.0
+        9       -0.996  0       1       0.0     0.05
+        10      -0.986  0       1       0.0     0.05
+        11      -0.372  0       0       0.0     0.0
+        12      -0.004  1       1       0.042   0.05
+        13      0.582   1       0       0.042   0.0
+        14      0.837   1       0       0.042   0.0
+        15      1.023   3       1       0.125   0.05
+        16      1.674   3       0       0.125   0.0
+        17      1.785   5       0       0.208   0.0
+        18      0.624   0       1       0.0     0.05
+        19      1.466   4       0       0.167   0.0
+        20      1.266   1       0       0.042   0.0
+        21      1.229   2       0       0.083   0.0
+        22      0.815   1       0       0.042   0.0
+        23      0.081   0       0       0.0     0.0
+        24      -0.135  1       1       0.042   0.05
+        25      0.03    0       0       0.0     0.0
+        26      0.257   1       0       0.042   0.0
+        27      -0.587  0       1       0.0     0.05
+        28      -0.388  0       0       0.0     0.0
+        29      -0.185  0       0       0.0     0.0
+        30      -0.163  0       0       0.0     0.0
+        31      -0.163  0       0       0.0     0.0
+        32      -0.163  0       0       0.0     0.0
+        33      -0.229  0       0       0.0     0.0
+        34      -0.807  0       0       0.0     0.0
+        35      -1.614  0       3       0.0     0.15
+</pre>
+
+Requirements:<br>
+<table>
+<tr><td valign=top>-</td><td>All permitted values associated with a feature must be present.</td></tr>
+<tr><td valign=top>-</td><td>Feature names must match <i>fdict</i> keys in the corresponding
+ <a href="#criteria"><i>criteria</i></a> file.  There must be a 1:1 correspondence between features in the
+ <i>.matrix</i> file and in the <a href="#criteria"><i>criteria</i></a> file.</td></tr>
+<tr><td valign=top>-</td><td>Columns must be tab-separated, and value lines must be indented with tabs.</td></tr>
+<tr><td valign=top>-</td><td>Value lines must immediately follow their feature name lines, and each feature name
+ may only be listed once per file.</td></tr>
+<tr><td valign=top>-</td><td>Lines beginning with a '#' will be ignored.</td></tr>
+</table>
+
+
+
+
+
+<br><br><br><br><br>
+<a id="scr"><u>.scr scoring result files</u></a>
+
+<p>This file stores the results of miRNA/candidate scoring.  Each line of the file corresponds
+to a particular candidate, whose name appears at the beginning of the line.  Following the name,
+each criterion/feature name is listed, followed by the score given for that feature.  In addition
+to the features described in the <a href="#criteria"><i>criteria</i></a> file, the following
+values are given:</p>
+
+<ul>
+  <li><b>totscore:</b> the sum of all the feature scores.</li>
+  <li><b>loc_[org]:</b> the predicted position for the 5p nucleotide of the mature miRNA
+   in the hairpin with organism key [org], indexed starting from 1.  One of these values is
+   given for each organism key.</li>
+</ul>
+
+Example:<br>
+<pre>
+mir-2a-2 totscore 54.832 loc_dp3 10 loc_dm2 10 loop_dis_G 0.582 nuc9_s1 -0.384 nuc9_s2 -0.536 bp_matrix_C_n-8 0.952 bp_matrix_C_n-7 0.952 bp_matrix_C_n-6 0.344 
+mir-2b-1 totscore 46.112 loc_dp3 50 loc_dm2 50 loop_dis_G 1.466 nuc9_s1 0.593 nuc9_s2 1.008 bp_matrix_C_n-8 -0.826 bp_matrix_C_n-7 0.952 bp_matrix_C_n-6 0.344 
+mir-3 totscore 42.026 loc_dp3 48 loc_dm2 43 loop_dis_G 1.023 nuc9_s1 0.371 nuc9_s2 0.371 bp_matrix_C_n-8 -0.826 bp_matrix_C_n-7 -0.826 bp_matrix_C_n-6 -0.367 
+</pre>
+
+Requirements:<br>
+<table>
+<tr><td valign=top>-</td><td>Names cannot contain spaces.</td></tr>
+<tr><td valign=top>-</td><td>One line per candidate.</td></tr>
+<tr><td valign=top>-</td><td>Score sum and location of the predicted mature miRNA in each hairpin of the candidate
+  must be specified as described above.</td></tr>
+<tr><td valign=top>-</td><td>Scores must be given in floating point decimal form.</td></tr>
+<tr><td valign=top>-</td><td>Lines beginning with a '#' will be ignored.</td></tr>
+</table>
+
+
+
+
+<br><br><br><br><br>
+<a id="criteria"><u>.py criteria files</u></a>
+
+<p>These files are formatted for evaluation the Python interpreter.  They must generate two variables, 
+bound to the indicated values, in the global environment:</p>
+
+<ul>
+  <li><b>mirscan:</b> bound to a function that applies scores to a provided set of candidates,
+    or can be used to examine feature value frequencies to derive scores.</li>
+  <li><b>fdict:</b> bound to a dictionary whose keys are the names of features and whose values
+    are the feature objects themselves.  The contents of this dictionary will determine what
+    aspects of the miRNA candidates are evaluated and scored.</li>
+</ul>
+
+<p>Each value in <i>fdict</i> must be an instance of either <i>string_feature</i> or <i>number_feature</i>
+classes, both of which are provided in <i>mirbaseModule.py</i>.  For each instance, the user must also define
+the following attributes:</p>
+
+<ul>
+  <li><b>fx:</b> a function that takes in a singel argument, <i>args</i>, and returns either a number or a string
+   (depending on which class of feature it is).  <i>args</i> is a dictionary defined in the <i>mirscan</i>
+   function; it must be set up to contain all data necessary for <i>fx</i> to evaluate a candidate.</li>
+  <li><b>kl:</b> a list of all the acceptable return values from <i>fx</i>.</li>
+</ul>
+
+<p>Prototype criteria files for one- or two-sequence candidates can be <a href="Downloads.html">downloaded</a>
+as part of the <a href="allScripts.tar.gz">All scripts</a> file package.  The <i>mirscan</i> function can be
+modified by the user in either of these prototypes to support multi-sequence criteria.  A commented-out prototype
+<i>feature</i> instance's implementation is also provided in each file.  For examples of <i>feature</i> objects,
+see the scoring matrices used in Ruby et al., Genome Res. 2007 that are available for <a href="Downloads.html">download</a>
+as part of the <a href="sampleFiles.tar.gz">Sample files</a> file package.</p>
+
+
+</body>
+</html>

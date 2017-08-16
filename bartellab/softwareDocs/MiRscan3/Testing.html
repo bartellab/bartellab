@@ -1,0 +1,140 @@
+<html>
+
+<body>
+
+<b><u><a id="#Testing">Testing</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+
+<br><br>
+
+
+<p>These tests simulate one round of mirscan filtering of candidate miRNAs using both a single-species
+candidate set and a two-species candidate set.  At each step, files with expected results are provided
+for comparison.  Those files can also be used to test a later step of analysis even if an early one 
+fails.</p>
+
+<br><br>
+
+<p>
+<b>Step 1.</b> Install the core mirscan scripts in the current working directory.
+</p>
+
+<p>
+<b>Step 2.</b> Download the sample file package and place the decompressed files in a subdirectory called "sampleFiles/".
+</p>
+
+<p>
+<b>Step 3.</b> Move the files "oneSeq.rubyEtAl.py" and "twoSeq.rubyEtAl.py" to the current working directory.
+</p>
+
+
+<br><br>
+
+
+<a id="oneOrg"><u>Single-Genome Mirscan</u></a>
+<br>
+
+<p>
+<b>Step 4.</b> Execute training of the single-species sample by executing the following command:
+<pre>
+python mirscanTrainer.py sampleFiles/oneSeq.round0.train oneSeq.rubyEtAl.py 0 sampleFiles/oneSeq.round0.test.matrix
+</pre>
+Compare sampleFiles/oneSeq.round0.matrix to sampleFiles/oneSeq.round0.test.matrix.
+The counts for the training set should be <a href="#errors">identical</a> to the values
+from the sample file (columns 3 and 5).  The remaining columns, including the scores, will likely differ.
+Even though the set of background candidates being used in this training session are consistent,
+the microRNA 5p ends for those candidates are unknown and are therefore assigned randomly
+(see supplemental text of Ruby et al. <i>Genome Res.</i> 2007 for more details).
+</p>
+
+
+<p>
+<b>Step 5.</b> Execute scoring of the foreground and background sets with the following commands:
+<pre>
+python mirscanExecute.py sampleFiles/oneSeq.round0.train oneSeq.rubyEtAl.py sampleFiles/oneSeq.round0.matrix sampleFiles/oneSeq.round0.test.scr
+python mirscanExecute.py sampleFiles/sample1.round0.fax oneSeq.rubyEtAl.py sampleFiles/oneSeq.round0.matrix sampleFiles/sample1.round0.test.scr
+</pre>
+Compare sampleFiles/oneSeq.round0.scr to sampleFiles/oneSeq.round0.test.scr 
+and sampleFiles/sample1.round0.scr to sampleFiles/sample1.round0.test.scr.
+Their un-commented contents should be <a href="#errors">identical</a>.
+</p>
+
+
+<p>
+<b>Step 6.</b> Execute cutting of the background set with the following command:
+<pre>
+python score_cut.py sampleFiles/oneSeq.round0.scr sampleFiles/sample1.round0.scr sampleFiles/sample1.round0.fax sampleFiles/sample1.round1.test.fax
+</pre>
+Compare sampleFiles/sample1.round1.fax to sampleFiles/sample1.round1.test.fax
+Their un-commented contents should be <a href="#errors">identical</a>.
+</p>
+
+
+<br><br>
+
+<a id="twoOrg"><u>Two-Genome Mirscan</u></a>
+<br>
+
+<p>
+<b>Step 7.</b>  Execute training of the two-species sample by executing the following command:
+<pre>
+python mirscanTrainer.py sampleFiles/twoSeq.round0.train twoSeq.rubyEtAl.py 0 sampleFiles/twoSeq.round0.test.matrix
+</pre>
+Compare sampleFiles/twoSeq.round0.matrix to sampleFiles/twoSeq.round0.test.matrix
+The counts for the training set should be <a href="#errors">identical</a> to the values
+from the sample file (columns 3 and 5).  The remaining columns, including the scores, will likely differ.
+Even though the set of background candidates being used in this training session are consistent,
+the microRNA 5p ends for those candidates are unknown and are therefore assigned randomly
+(see supplemental text of Ruby et al. <i>Genome Res.</i> 2007 for more details).
+</p>
+
+
+<p>
+<b>Step 8.</b> Execute scoring of the foreground and background sets with the following commands:
+<pre>
+python mirscanExecute.py sampleFiles/twoSeq.round0.train twoSeq.rubyEtAl.py sampleFiles/twoSeq.round0.matrix sampleFiles/twoSeq.round0.test.scr
+python mirscanExecute.py sampleFiles/sample2.round0.fax twoSeq.rubyEtAl.py sampleFiles/twoSeq.round0.matrix sampleFiles/sample2.round0.test.scr
+</pre>
+Compare sampleFiles/twoSeq.round0.scr to sampleFiles/twoSeq.round0.test.scr 
+and sampleFiles/sample2.round0.scr to sampleFiles/sample2.round0.test.scr
+Their un-commented contents should be <a href="#errors">identical</a>.
+</p>
+
+
+<p>
+<b>Step 9.</b> Execute cutting of the background set with the following command:
+<pre>
+python score_cut.py sampleFiles/twoSeq.round0.scr sampleFiles/sample2.round0.scr sampleFiles/sample2.round0.fax sampleFiles/sample2.round1.fax
+</pre>
+Their un-commented contents should be <a href="#errors">identical</a>.
+</p>
+
+
+
+<br><br><br>
+
+<a id="errors"><u>Sources of Error</u></a>
+<br>
+
+<p>If results differ substantially from expected, consider the following:
+<ul>
+  <li>Did you follow the installation instructions?  Try deleting mirscan scripts 
+    and/or sample files and re-installing.</li>
+  <li>Was an exception raised, or an error indicated by text printed to the command 
+    line (stderr)?  What was the source of error indicated by the exception/error message?</li>
+</ul>
+</p>
+
+
+<p>If results are close to those that are expected but not exactly the same, here are some things to consider:
+<ul>
+  <li>Different implementations of RNAfold could return subtly different mfe structures.  If there
+    were slight differences in the secondary structure scores, this could be the source of error.</li>
+  <li>Although rounding error should not be a substantial problem, it could generate differences,
+    especially if versions of Python have changed substantially.  Consider if your discrepancies are small
+    and infrequent enough to be attributed to mathematical errors of this sort.</li>
+</ul>
+</p>
+
+
+</body>
+</html>

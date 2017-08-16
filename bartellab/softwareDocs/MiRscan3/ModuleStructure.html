@@ -1,0 +1,111 @@
+<html>
+
+<body>
+
+
+<b><u><a id="ModuleStructure">Module Structure</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+<ul>
+  <li><a href="#Overview">Overview</a></li>
+  <li><a href="#Dependencies">Dependencies</a></li>
+</ul>
+
+
+<br><br><br>
+
+<a id="Overview"><u>Overview</u></a>
+
+<p><i>mirscanExecute.py</i> performs the function of applying scores to each in a set of candidate hairpins
+according to a pre-defined scoring matrix.  The evaluation of hairpins is done using a set of
+<a href="RuntimeStructure.html#feature">criteria</a> implemented in some 
+<a href="FileFormats.html#criteria"><i>criteria-formatted</i></a> file (referred to here as <i>mirscanCriteria.py</i>).
+The same <i>mirscanCriteria.py</i> file should also have been used for the training step,
+performed by <i>mirscanTrainer.py</i>, that generated the scoring matrix.  The feature evaluation functions
+of <i>mirscanCriteria.py</i> implement an author's ideas regarding what is important about a miRNA hairpin 
+(base pairing, conservation, etc.).  Such ideas are expected to differ between different
+authors, and even to change for a single author depending on time and context.  The design of this system
+allows a programmer to implement a given set of ideas only once, in the context of <i>mirscanCriteria.py</i>.
+The inheritance of that implementation by both <i>mirscanTrainer.py</i> and <i>mirscanExecute.py</i> facilitates
+the beginning-to-end process of mirscan-based candidate evaluation.</p>
+
+
+<p>An example of this flexibility is provided in the current study by Ruby et al. (Genome Res, 2007) in the change 
+from considering a candidate as a single sequence to a candidate as a pair of (presumably orthologous) sequences.
+The two concepts of a candidate were each implemented as a separate instance of the <i>mirscanCriteria.py</i> script 
+(<i>oneSeq.RubyEtAl.py</i> for single sequence candidates, <i>twoSeq.RubyEtAl.py</i> for sequence pair candidates).
+<a href="Downloads.html">On this site</a>, the user is provided with both of those modules, as well as prototype 
+versions of each (<i>oneSeq.prototype.py</i> and <i>twoSeq.prototype.py</i>) to which feature objects can be added 
+as desired.</p>
+
+
+
+<br><br><br>
+
+<a id="Dependencies"><u>Dependencies</u></a>
+
+<br>
+<!-- This is the module dependency diagram -->
+<img src="mdd.gif" width=500>
+
+<p>Above are the fundamental dependencies of the scripts comprising the mirscan system.  All scripts depend
+on <i>mirscanModule.py</i>, where most of the core functionality used across the system is implemented.  
+<i>mirscanTrainer.py</i> and <i>mirscanExecute.py</i> additionally depend on the <i>mirscanCriteria.py</i>
+files that are used to evaluate miRNA hairpin candidates.  These two dependencies are what gives the mirscan
+system its flexibility.  In modifying or expanding mirscan's functionality, the user may create additional
+dependencies.  For instance, the function <i>get_folds</i> in the provided <i>mirscanModule.py</i> depends on
+the RNAfold application from the <a href="http://www.tbi.univie.ac.at/~ivo/RNA/">Vienna RNA Package</a>
+being installed on the host computer system.  This dependency could be removed or changed if the implementation
+of <i>get_folds</i> were changed.  The most independent component of the system is <i>score_cut.py</i>, which
+only depends on <i>mirscanModule.py</i> for the file-parsing functions that it uses.  A more complete listing of 
+the dependencies for each module is provided below:
+
+<ul>
+  <li><i>mirscanModule.py</i></li>
+  <ul>
+    <li>File format dependencies: <i>None</i></li>
+    <li>Mirscan system dependencies: <i>None</i></li>
+    <li>External dependencies:</li>
+    <ul>
+      <li><i>RNAfold</i> from the <a href="http://www.tbi.univie.ac.at/~ivo/RNA/">Vienna RNA Package</a>
+        is required by the <i>get_folds</i> function.  It must be installed as a callable application
+        on the host Linux system.</li>
+    </ul>
+  </ul>
+
+  <li><i>mirscanCriteria.py</i></li>
+  <ul>
+    <li>File format dependencies: <i>None</i></li>
+    <li>Mirscan system dependencies: <i>mirscanModule.py</i></li>
+    <li>External dependencies: <i>None</i></li>
+  </ul>
+
+  <li><i>mirscanTrainer.py</i></li>
+  <ul>
+    <li>File format dependencies: <i><a href="FileFormats.html#train">.train</a>,
+      <a href="FileFormats.html#fax">.fax</a>, <a href="FileFormats.html#matrix">.matrix</a>,
+      <a href="FileFormats.html#criteria">.py criteria</a></i></li>
+    <li>Mirscan system dependencies: <i>mirscanModule.py, mirscanCriteria.py</i></li>
+    <li>External dependencies: <i>None</i></li>
+  </ul>
+
+  <li><i>mirscanExecute.py</i></li>
+  <ul>
+    <li>File format dependencies: <i><a href="FileFormats.html#train">.train</a>,
+      <a href="FileFormats.html#fax">.fax</a>, <a href="FileFormats.html#matrix">.matrix</a>,
+      <a href="FileFormats.html#scr">.scr</a>, <a href="FileFormats.html#criteria">.py criteria</a></i></li>
+    <li>File format dependencies: <i></i></li>
+    <li>Mirscan system dependencies: <i>mirscanModule.py, mirscanCriteria.py</i></li>
+    <li>External dependencies: <i>None</i></li>
+  </ul>
+
+  <li><i>score_cut.py</i></li>
+  <ul>
+    <li>File format dependencies: <i> <a href="FileFormats.html#scr">.scr</a>,
+      <a href="FileFormats.html#fax">.fax</a></i></li>
+    <li>Mirscan system dependencies: <i>mirscanModule.py</i></li>
+    <li>External dependencies: <i>None</i></li>
+  </ul>
+</ul>
+</p>
+
+</body>
+</html>

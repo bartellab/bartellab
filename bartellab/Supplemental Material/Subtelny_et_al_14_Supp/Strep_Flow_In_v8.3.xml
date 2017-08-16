@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<RecipeFile>
+
+	<!-- Strep_Flow_In_v8.3.xml -->
+	<!-- For use with ImageCyclePump (AF5 protocol) config file -->
+	<!-- For use with v4 Cluster kits -->
+	<!-- For SBS Kit Version: 5 -->
+	<!-- NOT COMPATIBLE with Standard v4 SBS kits (using IMX36) -->
+	<!-- Last updated 28feb14 - SRR -->
+
+	<!-- Single Folder Single Read Recipe (including FirstBase) -->
+
+	<!-- Optimisation of wash buffer steps in CompleteCycle -->
+	<!-- IMR delivery of 60ul and 10ul volumes -->
+	<!-- Incorporation time increased from 240 s to 291 s -->
+	<!-- Deblock increased from 180 s to 240 s -->
+	<!-- Inclusion of a User Event during CompleteCycle to pause SCS if RTA is lagging in early cycles -->
+
+	<!-- Exposure Time: 1225ms (A=500, C=350, G=200, T=175) -->
+	<!-- No. Tiles Per Column: 60 -->
+	<!-- No. Cycles: 36 -->
+
+
+  <TileSelection>
+
+    <Incorporation>
+	<Lane Index="1"><RowRange Min="1" Max="60"/></Lane>
+	<Lane Index="2"><RowRange Min="1" Max="60"/></Lane>
+	<Lane Index="3"><RowRange Min="1" Max="60"/></Lane>
+	<Lane Index="4"><RowRange Min="1" Max="60"/></Lane>
+	<Lane Index="5"><RowRange Min="1" Max="60"/></Lane>
+	<Lane Index="6"><RowRange Min="1" Max="60"/></Lane>
+	<Lane Index="7"><RowRange Min="1" Max="60"/></Lane>
+	<Lane Index="8"><RowRange Min="1" Max="60"/></Lane>
+    </Incorporation>
+
+    <ReadPrep>
+  	<Row Index="5" /> 
+  	<Row Index="26" /> 
+  	<Row Index="45" /> 
+    </ReadPrep>
+
+
+  </TileSelection>
+
+
+  <ChemistryDefinitions>
+
+	<!-- DEFINITIONS: GENOME ANALYZER SBS -->
+     
+    <Chemistry Name="HITSStreptavidin">
+	<Temp Temperature="20" />
+	<UserWait Message="Load PBS at position 2. Click OK to Proceed, or CANCEL to Stop." />
+	<PumpToFlowcell Solution="2" AspirationRate="250" DispenseRate="2500" Volume="200" /> 
+	<UserWait Message="PBS Wash Complete. Load BSA at position 2. Click OK to Proceed, or CANCEL to Stop." />
+  	<PumpToFlowcell Solution="2" AspirationRate="250" DispenseRate="2500" Volume="200" /> 
+	<UserWait Message="Blocking Complete. Load streptavidin at position 2. Click OK to Proceed, or CANCEL to Stop." />
+	<PumpToFlowcell Solution="2" AspirationRate="250" DispenseRate="2500" Volume="200" />
+	<UserWait Message="Load PBS at position 2. Click OK to Proceed, or CANCEL to Stop." />
+	<Wait Duration="600000" />
+	<PumpToFlowcell Solution="2" AspirationRate="250" DispenseRate="2500" Volume="200" /> 
+	<TempOff />
+    </Chemistry>
+
+    <Chemistry Name="HITSWash">
+	<Temp Temperature="20" />
+  	<PumpToFlowcell Solution="2" AspirationRate="250" DispenseRate="2500" Volume="200" />
+	<TempOff />
+    </Chemistry>
+
+  </ChemistryDefinitions>
+
+
+  <Protocol>
+
+    <ChemistryRef Name="HITSStreptavidin" />
+
+    <ReadPrep ExposureA="400" ExposureC="400" ExposureG="400" ExposureT="400" />
+
+    <Incorporation ChemistryName="HITSWash" ExposureA="500" ExposureC="350" ExposureG="200" ExposureT="175" />
+
+    <ChemistryRef Name="HITSWash" />
+
+	<UserWait Message="Imaging Complete. Repeat this protocol, or remove flow cell from GAII." />
+
+  </Protocol>
+
+</RecipeFile>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

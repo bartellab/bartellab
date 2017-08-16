@@ -1,0 +1,55 @@
+<html>
+
+<body>
+
+<b><u><a id="#Requirements">Requirements</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+
+<ul>
+  <li><a href="#Overview">Overview</a></li>
+  <li><a href="#Specifications">Specifications</a></li>
+  <li><a href="#User Manual">User Manual</a></li>
+  <li><a href="#Performance">Performance</a></li>
+  <li><a href="#Problem Analysis">Problem Analysis</a></li>
+</ul>
+
+<br><br>
+
+<u><a id="#Overview">Overview</a></u>
+
+<p>Mirscan is implemented in python.  Its functionality is divided into three modules, each of 
+which is implemented as a python script:  mirscan.py, mstrainer.py, and score_cut.py.</p>
+
+<p><b>mirscan.py</b> evaluates the probabilities of each in a set of candidates being miRNA 
+hairpins.  It contains methods for evaluating the features of hairpins (like nucleotide preferences,
+number of base pairs, bulge sizes, etc).  Users can change the set of evaluated features to suit
+their preferences.  In the system presented here, two variants of this script are presented: 
+<i>mirscan.ss.py</i>, which is designed to examine the features of individual hairpin candidates, and
+<i>mirscan.ms.py</i>, which is designed to examine candidates that are pairs of presumably orthologous 
+hairpins.</p>
+
+<p><b>mstrainer.py</b> generates the scoring matricies that will be applied to candidates by 
+mirscan.py.  It compares the features of a user-defined set of foreground miRNA hairpins
+with those of a user-defined background set of candidates.  Log-odds scores are generated for
+each possible value that can be associated with a feature, each of which reflects the probability
+that the given value was derived from a member of the foreground set vs. the background set.
+mstrainer.py relies on a user-selected mirscan.py script to provide methods for evaluating 
+hairpin features, thus ensuring that changes to the feature evaluation process will always be
+reflected in the training process.</p>
+
+<p><b>score_cut.py</b> considers the distribution of scores given to foreground and background
+hairpins and generates a new candidate set with those members of the scored background set with 
+the least resemblence to the foreground set removed.</p>
+
+
+<br><br>
+
+<a id="#Specifications">Specifications</a>
+
+<a id="#User Manual">User Manual</a>
+
+<a id="#Performance">Performance</a>
+
+<a id="#Problem Analysis">Problem Analysis</a>
+
+</body>
+</html>

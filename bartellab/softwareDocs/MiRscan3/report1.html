@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Untitled Document</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+</head>
+python mirscanTrainer.py ath/ath43.round0.train oneSeq.rubyEtAl.py 0 ath/ath.round0.matrix<br>
+Traceback (most recent call last):<br>
+  File "mirscanTrainer.py", line 160, in <module><br>
+    scorestring = train(trainFile,criteriaFile,number)<br>
+  File "mirscanTrainer.py", line 75, in train<br>
+    for i in mse['mirscan'](fqueries,mse['bogus_ms'],True,fstarts):<br>
+  File "< string>", line 81, in mirscan<br>
+  File "/home/yh/Program/miRScan/allScripts/mirscanModule.py", line 538, in pick_side<br>
+    answers = map(lambda r: pick_side_help(folds[r],seqsoral[r],pos[r],le,r), range(len(seqsoral)))<br>
+  File "/home/yh/Program/miRScan/allScripts/mirscanModule.py", line 538, in <lambda><br>
+    answers = map(lambda r: pick_side_help(folds[r],seqsoral[r],pos[r],le,r), range(len(seqsoral)))<br>
+  File "/home/yh/Program/miRScan/allScripts/mirsc anModule.py", line 520, in pick_side_help<br>
+    p = count_along(pos,0,le,1,seq)<br>
+  File "/home/yh/Program/miRScan/allScripts/mirscanModule.py", line 511, in count_along<br>
+    if seq[zp]!='-': zq+=1<br>
+IndexError: string index out of range<br>
+
+<body>
+</body>
+</html>

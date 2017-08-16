@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<RecipeFile>
+
+  <!-- <RecipeName>Primer_Extension_v9.xml</RecipeName> -->
+  <!-- Last updated 28FEBRUARY2014 - ASUBTELNY-->
+  <!-- Use ONLY for V4 Cluster kits and Phusion, DO NOT use with original Solexa cluster kits or V2 cluster kits. -->
+  
+  <ChemistryDefinitions>
+
+	<Chemistry Name="HITSProtocol">
+      <TempRamp Temperature="20" Rate="1"/>
+      <UserWait Message="Place strip tube K (140ul Klenow buffer) in tube strip holder and wait until temperature stabilizes to 20C.  Click OK to proceed."  />
+      <Pump Reagent="26" AspirationRate="60" Volume="100" />
+      <UserWait Message="Place strip tube L (Synthesis Mix (dTTP, biotin-16-dUTP, Klenow enzyme, Klenow buffer)) in tube strip holder.  Click OK to proceed." />
+      <Pump Reagent="26" AspirationRate="60" Volume="100" />
+      <TempRamp Temperature="37" Rate="1"/>
+      <!-- 1800 seconds for enzyme activity -->
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="120" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <Pump Reagent="26" AspirationRate="60" Volume="50" />
+      <Wait Duration="120000"/>
+      <TempRamp Temperature="20" Rate="1"/>
+      <UserWait Message="Place stripe tube M (100ul HT2 Wash buffer plus 10 mM Na-EDTA) in tube strip holder.  Click OK to proceed." />
+      <Pump Reagent="26" AspirationRate="60" Volume="75" />
+      <UserWait Message="Place stripe tube N (100ul HT1 Hyb Buffer) in tube strip holder.  Click OK to proceed." />
+      <Pump Reagent="26" AspirationRate="60" Volume="75" />
+    </Chemistry>
+
+  </ChemistryDefinitions>
+
+
+  <Protocol>
+
+    <!-- Extension of sequencing primer -->
+
+    <ChemistryRef Name="HITSProtocol" />
+
+    <UserWait Message="Flowcell is ready for sequencing on 1G Genetic Analyzer." />
+   
+  </Protocol>
+
+</RecipeFile>

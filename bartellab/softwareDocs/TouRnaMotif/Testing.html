@@ -1,0 +1,76 @@
+<html>
+
+<body>
+
+<b><u><a id="#Testing">Testing</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+
+<br><br>
+
+
+
+<p>
+<b>Step 1.</b> Place the scoring modules <i>motifModule.py</i>, <i>touScoreModule.py</i>, and the test module
+<i>testSequences.py</i> in the working directory.
+</p>
+
+<p>
+<b>Step 2.</b> Begin an interactive python session.  Import the scoring module by typing:
+<pre>import touScoreModule as tsm</pre>
+at the prompt.  Then import the lists of test sequences by typing:
+<pre>import testSequences as test</pre>
+at the prompt.
+</p>
+
+<p>
+<b>Step 3.</b> Test the <i>applyScore</i> function by typing the following commands at the
+prompt and checking that you get the following values returned:
+<pre>
+>>> for t in test.applyScore: print tsm.applyScore(t)
+... 
+27.6637051417
+20.7595812241
+22.0892347392
+17.7824321386
+</pre>
+</p>
+
+<p>
+<b>Step 3.</b> Test the <i>predictTou</i> function by typing the following commands at the
+prompt and checking that you get the following values returned:
+<pre>
+>>> for t in test.predictTou: print tsm.predictTou(t)
+... 
+(17.782432138586955, 58)
+(22.089234739166024, 58)
+(20.759581224050276, 57)
+(27.663705141670356, 57)
+</pre>
+</p>
+
+<p>
+<b>Step 3.</b> Test the <i>findTous</i> function by typing the following commands at the
+prompt and checking that you get the following values returned, testing for score thresholds
+of 7, 15.5, and 27:
+<pre>
+>>> for t in test.findTous: print tsm.findTous(t,7)
+... 
+[]
+[65, 66, 67, 68, 69, 70, 71, 72, 73]
+[68, 69, 71, 72, 73]
+>>> for t in test.findTous: print tsm.findTous(t,15.5)
+... 
+[]
+[65, 68, 69, 71, 72]
+[69]
+>>> for t in test.findTous: print tsm.findTous(t,27)  
+... 
+[]
+[68]
+[]
+</pre>
+</p>
+
+
+
+</body>
+</html>

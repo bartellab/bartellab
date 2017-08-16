@@ -1,0 +1,126 @@
+<html>
+
+<body>
+
+<b><u><a id="#Downloads">Downloads</a></u></b> (back to <a href="Introduction.html">Introduction</a>)
+
+<br><br>
+
+<p>Download by right-clicking on the links below and selecting "Save as".</p>
+
+<p>Use the linux applications <a href="http://www.gzip.org">gzip</a> and 
+<a href="http://en.wikipedia.org/wiki/Tar_(file_format)">tar</a> to 
+decompress the file packages.</p>
+
+<br>
+
+<ul>
+  <li><a href="docs.tar.gz">Documentation</a> contains all of the doc pages found here,
+    along with all of the associated file packages.  Download, unzip into a host directory,
+    and use this documentation locally.  Start by opening the file "Introduction.html" in
+    your web browser.</li>
+
+  <li><a href="allScripts.tar.gz">All scripts</a> contains all of the python
+    scripts necessary for running mirscan.  It includes:</li>
+  <ul>
+    <li><i>mirscanTrainer.py</i></li> 
+    <li><i>mirscanExecute.py</i></li>
+    <li><i>mirscanModule.py</i></li> 
+    <li><i>score_cut.py</i></li>
+    <li><i>oneSeq.prototype.py</i></li>
+    <li><i>twoSeq.prototype.py</i></li>
+  </ul>
+
+  <li><a href="sampleFiles.tar.gz">Sample files</a> contains sample files for each
+    of the <a href="FileFormats.html">file formats</a> used by mirscan.  These files can be
+    used to conduct <a href="Testing.html">tests</a> following installation.  It includes:</li>
+  <ul>
+    <li><i>oneSeq.round0.train</i>: one organism training/foreground.</li>
+    <li><i>twoSeq.round0.train</i>: two organism training/foreground.</li>
+    <li><i>sample1.round0.fax</i>: one organism background.</li>
+    <li><i>sample2.round0.fax</i>: two organism background.</li>
+    <li><i>oneSeq.round0.matrix</i>: one organism scoring matrix made using <i>oneSeq.rubyEtAl.py</i>.</li>
+    <li><i>twoSeq.round0.matrix</i>: two organism scoring matrix made using <i>twoSeq.rubyEtAl.py</i>.</li>
+    <li><i>oneSeq.round0.scr</i>: one organism foreground scoring results.</li>
+    <li><i>twoSeq.round0.scr</i>: two organism foreground scoring results.</li>
+    <li><i>sample1.round0.scr</i>: one organism background scoring results.</li>
+    <li><i>sample2.round0.scr</i>: two organism background scoring results.</li>
+    <li><i>sample1.round1.fax</i>: one organism background after one round of cutting.</li>
+    <li><i>sample2.round1.fax</i>: two organism background after one round of cutting.</li>
+    <li>The scoring criteria used in Ruby et al., Genome Res. 2007.</li>
+    <ul>
+      <li><i>oneSeq.rubyEtAl.py</i>: single organism criteria.</li>
+      <li><i>twoSeq.rubyEtAl.py</i>: two ortholog criteria.</li>
+    </ul>
+  </ul>
+
+
+  <li><a href="scoringMatrix.tar.gz">Scoring matrices</a> from Ruby et al., Genome Res., 2007.</li>
+  <ul>
+    <li>generated using <b>oneSeq.rubyEtAl.py</b>:</li>
+    <ul>
+      <li><i>dm2_0.matrix</i> ~ <i>dm2_4.matrix</i>: 
+        first ~ fifth-round scoring matrices from <i>Drosophila melanogaster</i> (assembly 
+        <a href="http://hgdownload.cse.ucsc.edu/downloads.html#fruitfly">dm2</a>), indexed from zero.</li>
+      <li><i>dp3_0.matrix</i> ~ <i>dp3_4.matrix</i>: 
+        first ~ fifth-round scoring matrices from <i>Drosophila pseudoobscura</i> (assembly 
+        <a href="http://hgdownload.cse.ucsc.edu/downloads.html#dp">dp3</a>), indexed from zero.</li>
+      <li><i>dana805_0.matrix</i> ~ <i>dana805_2.matrix</i>: 
+        first ~ third-round scoring matrices from <i>Drosophila ananassae</i> (assembly 
+        <a href="http://hgdownload.cse.ucsc.edu/downloads.html#droAna">droAna1</a>), indexed from zero.</li>
+      <li><i>dgri805_0.matrix</i> ~ <i>dgri805_2.matrix</i>: 
+        first ~ third-round scoring matrices from <i>Drosophila grimshawi</i> (assembly 
+        <a href="http://hgdownload.cse.ucsc.edu/downloads.html#droGri">droGri1</a>), indexed from zero.</li>
+      <li><i>dmoj805_0.matrix</i> ~ <i>dmoj805_2.matrix</i>: 
+        first ~ third-round scoring matrices from <i>Drosophila mojavensis</i> (assembly 
+        <a href="http://hgdownload.cse.ucsc.edu/downloads.html#droMoj">droMoj1</a>), indexed from zero.</li>
+      <li><i>dvir805_0.matrix</i> ~ <i>dvir805_2.matrix</i>: 
+        first ~ third-round scoring matrices from <i>Drosophila virilis</i> (assembly 
+        <a href="http://hgdownload.cse.ucsc.edu/downloads.html#droVir">droVir1</a>), indexed from zero.</li>
+    </ul>
+    <li>generated using <b>twoSeq.rubyEtAl.py</b>:</li>
+    <ul>
+      <li><i>dm2_dp3_0.matrix</i> ~ <i>dm2_dp3_3.matrix</i>: 
+        first ~ fourth-round scoring matrices from <i>Drosophila melanogaster</i>/<i>Drosophila pseudoobscura</i> pairs, indexed from zero.</li>
+      <li><i>dm2_dana805_0.matrix</i> ~ <i>dm2_dana805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila melanogaster</i>/<i>Drosophila ananassae</i> pairs, indexed from zero.</li>
+      <li><i>dm2_dgri805_0.matrix</i> ~ <i>dm2_dgri805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila melanogaster</i>/<i>Drosophila grimshawi</i> pairs, indexed from zero.</li>
+      <li><i>dm2_dmoj805_0.matrix</i> ~ <i>dm2_dmoj805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila melanogaster</i>/<i>Drosophila mojavensis</i> pairs, indexed from zero.</li>
+      <li><i>dm2_dvir805_0.matrix</i> ~ <i>dm2_dvir805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila melanogaster</i>/<i>Drosophila virilis</i> pairs, indexed from zero.</li>
+
+      <li><i>dp3_dana805_0.matrix</i> ~ <i>dp3_dana805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila pseudoobscura</i>/<i>Drosophila ananassae</i> pairs, indexed from zero.</li>
+      <li><i>dp3_dgri805_0.matrix</i> ~ <i>dp3_dgri805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila pseudoobscura</i>/<i>Drosophila grimshawi</i> pairs, indexed from zero.</li>
+      <li><i>dp3_dmoj805_0.matrix</i> ~ <i>dp3_dmoj805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila pseudoobscura</i>/<i>Drosophila mojavensis</i> pairs, indexed from zero.</li>
+      <li><i>dp3_dvir805_0.matrix</i> ~ <i>dp3_dvir805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila pseudoobscura</i>/<i>Drosophila virilis</i> pairs, indexed from zero.</li>
+
+      <li><i>dgri805_dana805_0.matrix</i> ~ <i>dgri805_dana805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila grimshawi</i>/<i>Drosophila ananassae</i> pairs, indexed from zero.</li>
+      <li><i>dgri805_dmoj805_0.matrix</i> ~ <i>dgri805_dmoj805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila grimshawi</i>/<i>Drosophila mojavensis</i> pairs, indexed from zero.</li>
+      <li><i>dgri805_dvir805_0.matrix</i> ~ <i>dgri805_dvir805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila grimshawi</i>/<i>Drosophila virilis</i> pairs, indexed from zero.</li>
+
+      <li><i>dmoj805_dana805_0.matrix</i> ~ <i>dmoj805_dana805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila mojavensis</i>/<i>Drosophila ananassae</i> pairs, indexed from zero.</li>
+      <li><i>dmoj805_dvir805_0.matrix</i> ~ <i>dmoj805_dvir805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila mojavensis</i>/<i>Drosophila virilis</i> pairs, indexed from zero.</li>
+
+      <li><i>dvir805_dana805_0.matrix</i> ~ <i>dvir805_dana805_3.matrix</i>:
+        first ~ fourth-round scoring matrices from <i>Drosophila virilis</i>/<i>Drosophila ananassae</i> pairs, indexed from zero.</li>
+    </ul>
+  </ul>
+
+
+</ul>
+
+
+
+</body>
+</html>
